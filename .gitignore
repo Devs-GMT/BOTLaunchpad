@@ -12,6 +12,7 @@ next-env.d.ts
 contracts/artifacts/
 contracts/cache/
 contracts/typechain-types/
+contracts/types/
 contracts/coverage/
 
 # env

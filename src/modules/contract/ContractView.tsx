@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { Skeleton } from "@/components/ui";
+import { site } from "@/config/site";
 import type { NetworkConfig } from "@/config/networks";
 import { interactBySlug } from "@/templates/interact";
 import { hasRegistry, useWallet } from "@/web3";
@@ -19,6 +21,12 @@ export interface ContractViewProps {
 export function ContractView({ address, network, fresh }: ContractViewProps) {
   const { address: me } = useWallet();
   const resolved = useResolveContract(address, network);
+  const resolvedName = resolved.data?.kind === "template" ? resolved.data.name : undefined;
+
+  // The server only knows the address; once the chain tells us what it is, name the tab after it.
+  useEffect(() => {
+    if (resolvedName) document.title = `${resolvedName} · ${site.name}`;
+  }, [resolvedName]);
 
   if (resolved.isLoading) {
     return (

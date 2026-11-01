@@ -18,13 +18,19 @@ Before mainnet launch, check the decimals and whether the explorer verify form i
 
 ## 2. Compiler settings (fixed)
 
-```ts
-solidity: {
-  version: '0.8.20',
-  settings: { optimizer: { enabled: true, runs: 200 }, evmVersion: 'paris', metadata: { bytecodeHash: 'none' } },
+Deployable template bytecode is **not** taken from Hardhat artifacts. `contracts/scripts/solc.ts` compiles each template on its own with solc-js 0.8.20, from a minimal standard-JSON input:
+
+```jsonc
+{
+  "language": "Solidity",
+  "sources": { "contracts/templates/Poll.sol": { "content": "…" } },
+  "settings": { "optimizer": { "enabled": true, "runs": 200 }, "evmVersion": "paris", "outputSelection": { … } }
 }
 ```
-`bytecodeHash: 'none'` keeps the metadata IPFS hash (which embeds the source path) out of the bytecode, so verification works whatever the uploaded file is named. Trade-off, confirmed on Blockscout 2026-11-01: explorers can only report a **partial** match (bytecode + settings identical, no metadata fingerprint to compare). The Verify helper shows these exact values, including "Metadata hash: none". Changing any of them changes every code hash, which means a new registry.
+
+Why: the metadata IPFS hash at the end of the bytecode covers the source path, the settings and any remappings. Hardhat compiles templates in one job with the test files and injects a `forge-std` remapping, which would leak into the hash, so nobody could reproduce it on an explorer. With an isolated input that we also hand to the user, explorers recompile the same thing and report a **full match** (confirmed on Blockscout 2026-11-01).
+
+Hardhat (`hardhat.config.ts`, same version/optimizer/EVM) is still used for the tests and for the registry. Changing a template source, the solc version or these settings changes every code hash, which means a **new registry**.
 
 ## 3. Shared template rules
 
@@ -136,7 +142,7 @@ No admin, no fees, no tokens, no upgrade path. A new template set means a new re
 
 ## 6. Verify helper content
 
-For each contract the page shows: compiler `v0.8.20+commit.a1b79de6`, optimizer `enabled, 200 runs`, EVM `paris`, licence `MIT`, contract name, **ABI-encoded constructor args** (computed in the browser with `AbiCoder.encode(constructorTypes, args)`, where args are read back from the contract's public getters or, for a fresh launch, taken from the wizard state), **source** (a single file, so no flattening needed), then 5 short steps for the scan.botchain.ai verify form.
+The explorers (scan.botchain.ai, scan.bohr.life) are **Blockscout**. For each contract the page shows: compiler `v0.8.20+commit.a1b79de6`, optimizer `enabled, 200 runs`, EVM `paris`, metadata `ipfs`, licence `MIT`, contract name and source path, the **ABI-encoded constructor args** (read back with each template's `readArgs` and encoded in the browser), the **standard-JSON input** as a download (the exact input from §2), and the source. Steps: Contract → Verify & publish → *Solidity (Standard JSON input)* → upload → compiler → contract name → paste args (auto-fetch off) → MIT.
 
 ## 7. `src/generated/templates.json` schema
 
@@ -174,12 +180,13 @@ Written by `contracts/scripts/export.ts` after `compile`. The frontend imports i
 
 | Network | LaunchpadRegistry | Deployed | Tx |
 |---|---|---|---|
-| Testnet (968) | [`0xE310126CF53AeE93185Aae969a619cb402bEB472`](https://scan.bohr.life/address/0xE310126CF53AeE93185Aae969a619cb402bEB472) | 2026-11-01, block 28891895 | `0xe525e300…eaa20136b` |
+| Testnet (968) | [`0x4c6F375aE291886322138a60EaC565978AAb80BC`](https://scan.bohr.life/address/0x4c6F375aE291886322138a60EaC565978AAb80BC) | 2026-11-01, block 28897193 | `0x988012ef…161343d` |
 | Mainnet (677) | _tbd_ | | |
 
-Testnet smoke launches (`pnpm -C contracts smoke --network botTestnet`, 2026-11-01): Guestbook `0x1c15E67b1bacdeCBE2Ba3D80048F20Ba272c3d35` · Poll `0x1Db7B570c0DA89F4468C97B2eF2A4780EdD85a40` · TodoBoard `0xD4742B0Af52bA9f050D6c35A4f0238679ec17B4e` · TipJar `0x9C3F89409c7fdCbF49CA59487c69586469417F43` · EventCheckIn `0x64BB653506be04B5CAbb1521bEc70c458665e4dF`. Registry rejected wrong id (`CodeMismatch`), relisting (`AlreadyRegistered`), an EOA (`NotAContract`) and a non-owner (`NotOwner`). Register costs ~200–234k gas.
+Testnet smoke launches against registry v2 (`pnpm -C contracts smoke --network botTestnet`, 2026-11-01): Guestbook `0xB44ea5a5187c2c61B2F3ADbA5cB2deF796cc1f4A` · Poll `0x7DCba55a0581dc26a4Ddfa22503CB89e45f61343` (fully verified on scan.bohr.life via the Verify helper output) · TodoBoard `0x603631C96c5561e89b58Fdc48742898Bf56eE49B` · TipJar `0x9C1B2262F836C20Eac2371Cf0C9501432aCf77bC` · EventCheckIn `0x05F116Fe56570E0817227f3BB501BF0edd71Bcb6`. Registry rejected wrong id (`CodeMismatch`), relisting (`AlreadyRegistered`), an EOA (`NotAContract`) and a non-owner (`NotOwner`). Register costs ~200–234k gas.
 
 Seed launches (mainnet), one per template: _tbd_.
 
 ## 9. Changelog
-- v1: initial 5 templates + registry. `bytecodeHash: none`. Deploy gas on the in-process network: Guestbook 628k · Poll 729k · TodoBoard 719k · TipJar 737k · EventCheckIn 577k (≈0.012–0.015 BOT at 20 gwei).
+- v2 (2026-11-01): deploy gas Guestbook 637k · Poll 738k · TodoBoard 728k · TipJar 746k · EventCheckIn 586k (≈0.012–0.015 BOT at 20 gwei). Templates compiled in isolation with solc-js and the default `bytecodeHash: ipfs`, so explorer verification is a full match. New testnet registry `0x4c6F…80BC`; contracts launched against v1 (`0xE310…B472`) are no longer recognised as templates.
+- v1: initial 5 templates + registry. `bytecodeHash: none` (explorers could only give a partial match). 

@@ -36,9 +36,13 @@ async function expectRevert(label: string, errorName: string, run: () => Promise
   }
 }
 
+// Deploy exactly what the website deploys: the exported bytecode.
+const exported = JSON.parse(await readFile(new URL("templates.json", GENERATED_DIR), "utf8")).templates as { id: number; abi: never; bytecode: string }[];
+const artifactOf = (id: number) => exported.find((x) => x.id === id)!;
+
 const deployed: Record<string, string> = {};
 for (const t of TEMPLATES) {
-  const artifact = await hre.artifacts.readArtifact(t.contractName);
+  const artifact = artifactOf(t.id);
   const factory = new ethers.ContractFactory(artifact.abi, artifact.bytecode, owner);
   const contract = await factory.deploy(...t.sampleArgs());
   await contract.waitForDeployment();
@@ -53,21 +57,17 @@ await expectRevert("wrong template id", "CodeMismatch", () => registry.getFuncti
 await expectRevert("already registered", "AlreadyRegistered", () => registry.getFunction("register").staticCall(deployed["poll"], 2, "x"));
 await expectRevert("EOA", "NotAContract", () => registry.getFunction("register").staticCall(second.address, 1, "x"));
 
-const extra = await new ethers.ContractFactory(
-  (await hre.artifacts.readArtifact("Guestbook")).abi,
-  (await hre.artifacts.readArtifact("Guestbook")).bytecode,
-  owner,
-).deploy("Not yours");
+const extra = await new ethers.ContractFactory(artifactOf(1).abi, artifactOf(1).bytecode, owner).deploy("Not yours");
 await extra.waitForDeployment();
 await expectRevert("non-owner lists it", "NotOwner", () =>
   (registry.connect(second) as typeof registry).getFunction("register").staticCall(extra.target, 1, "mine?"),
 );
 
 console.log("\nWallet #2 interacts");
-const poll = new ethers.Contract(deployed["poll"]!, (await hre.artifacts.readArtifact("Poll")).abi, second);
+const poll = new ethers.Contract(deployed["poll"]!, artifactOf(2).abi, second);
 await (await poll.getFunction("vote")(1)).wait();
 console.log(`  ✓ voted, results = ${(await poll.getFunction("results")()).join(",")}`);
-const book = new ethers.Contract(deployed["guestbook"]!, (await hre.artifacts.readArtifact("Guestbook")).abi, second);
+const book = new ethers.Contract(deployed["guestbook"]!, artifactOf(1).abi, second);
 await (await book.getFunction("sign")("gm from wallet #2")).wait();
 console.log(`  ✓ signed guestbook, entries = ${await book.getFunction("entryCount")()}`);
 

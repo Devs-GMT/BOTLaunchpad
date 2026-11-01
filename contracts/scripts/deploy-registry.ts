@@ -3,6 +3,7 @@
 //   pnpm -C contracts deploy:registry --network botTestnet
 import { readFile, writeFile } from "node:fs/promises";
 import hre from "hardhat";
+import { compileTemplate } from "./solc.js";
 import { GENERATED_DIR, TEMPLATES } from "./templates.js";
 
 const { ethers, networkName } = await hre.network.create();
@@ -13,11 +14,10 @@ if (chainId !== 968n && chainId !== 677n) {
 
 const generated = JSON.parse(await readFile(new URL("templates.json", GENERATED_DIR), "utf8"));
 
-// Guard against a stale templates.json: hashes must match the freshly compiled artifacts.
+// Guard against a stale templates.json: hashes must match a fresh isolated compile of the sources.
 const hashes: string[] = [];
 for (const t of TEMPLATES) {
-  const artifact = await hre.artifacts.readArtifact(t.contractName);
-  const fresh = ethers.keccak256(artifact.deployedBytecode);
+  const fresh = ethers.keccak256((await compileTemplate(t.contractName)).deployedBytecode);
   const exported = generated.templates.find((x: { id: number }) => x.id === t.id)?.runtimeCodeHash;
   if (fresh !== exported) throw new Error(`${t.contractName}: templates.json is stale. Run \`pnpm -C contracts export\`.`);
   hashes.push(fresh);

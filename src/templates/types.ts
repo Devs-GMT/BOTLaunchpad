@@ -18,6 +18,10 @@ export interface TemplateArtifact {
   functionsCount: number;
   deployGas: number;
   source: string;
+  /** Path used as the source key at compile time; part of the metadata hash. */
+  sourcePath: string;
+  /** The exact solc input that produced `bytecode`. Upload as-is to verify (full match). */
+  standardInput: Record<string, unknown>;
 }
 
 interface BaseField {

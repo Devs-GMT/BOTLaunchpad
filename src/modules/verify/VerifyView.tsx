@@ -51,9 +51,9 @@ export function VerifyView({ address, network }: { address: `0x${string}`; netwo
   const steps = [
     { label: `Open the contract on ${explorerHost} and go to Contract → Verify & publish.`, status: "upcoming" as const },
     { label: "Method: Solidity (Standard JSON input). Upload the JSON file from this page.", status: "upcoming" as const },
-    { label: `Compiler ${compiler.version}. Contract name: ${artifact.contractName}.`, status: "upcoming" as const },
+    { label: `Compiler ${compiler.version}. Contract name: ${artifact.contractName} (file ${artifact.sourcePath}).`, status: "upcoming" as const },
     { label: "Turn off “Try to fetch constructor arguments automatically” and paste the arguments below.", status: "upcoming" as const },
-    { label: "License: MIT. Submit. The explorer recompiles and marks the contract verified (partial match, see below).", status: "upcoming" as const },
+    { label: "License: MIT. Submit. The explorer recompiles the same input and reports a full match.", status: "upcoming" as const },
   ];
 
   return (
@@ -81,7 +81,7 @@ export function VerifyView({ address, network }: { address: `0x${string}`; netwo
             <LedgerRow left="EVM version" right={compiler.evmVersion.toUpperCase()} />
             <LedgerRow left="Metadata hash" right={compiler.bytecodeHash.toUpperCase()} />
             <LedgerRow left="License" right={compiler.license} />
-            <LedgerRow left="Source file" right={artifact.fileName} />
+            <LedgerRow left="Source file" right={artifact.sourcePath} />
           </div>
 
           {args.isLoading ? (
@@ -106,7 +106,7 @@ export function VerifyView({ address, network }: { address: `0x${string}`; netwo
               )}
             </div>
             <p className="text-small text-ink-500">
-              Includes the exact optimizer and EVM settings. Templates are compiled without a metadata hash, so explorers report a <em>partial</em> match: the code and settings are proven identical, only the metadata fingerprint is absent.
+              This is the exact compiler input that produced the bytecode you deployed: same source path, optimizer, EVM version and metadata. Uploading it as-is gives a full match.
             </p>
           </div>
 

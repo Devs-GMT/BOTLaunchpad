@@ -18,7 +18,7 @@ Read before working:
 - ethers v6 for chain access. TanStack Query for RPC reads. zod + react-hook-form for forms.
 - shiki (lazy-loaded, client only) for Solidity code view
 - Fonts via `next/font/google`: Host Grotesk (sans/display), JetBrains Mono (mono)
-- Contracts: Hardhat (TypeScript) in its own package at `contracts/`. Solidity 0.8.20, optimizer on, 200 runs, `evmVersion: paris`.
+- Contracts: Hardhat 3 (TypeScript) in its own package at `contracts/` for tests and the registry. Solidity 0.8.20, optimizer on, 200 runs, `evmVersion: paris`. **Deployable template bytecode comes from `contracts/scripts/solc.ts`** (isolated solc-js compile), never from Hardhat artifacts (see CONTRACTS.md §2).
 - Package manager: pnpm (workspace: root app + `contracts`)
 - Hosting: Vercel + custom domain. The app is client-rendered and has no API routes or server actions.
 
@@ -34,6 +34,8 @@ pnpm -C contracts compile
 pnpm -C contracts test                       # all template + registry tests
 pnpm -C contracts export                     # writes src/generated/templates.json
 pnpm -C contracts deploy:registry --network botTestnet   # or botMainnet
+pnpm -C contracts smoke --network botTestnet             # 2-wallet end-to-end check on testnet
+pnpm -C contracts balance --network botTestnet           # deployer balance (key in .env.local)
 ```
 
 ## Architecture rules (non-negotiable)

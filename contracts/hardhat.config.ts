@@ -6,15 +6,13 @@ import { configVariable, defineConfig } from "hardhat/config";
 const rootEnv = new URL("../.env.local", import.meta.url);
 if (existsSync(rootEnv)) process.loadEnvFile(rootEnv);
 
-// Fixed compiler settings: every template code hash depends on them.
-// Changing anything here requires a new LaunchpadRegistry (docs/CONTRACTS.md §2).
+// Used by tests and the registry. Deployable template bytecode is compiled separately and in isolation
+// by scripts/solc.ts (same version/optimizer/EVM), so verification on explorers is a full match.
 const compiler = {
   version: "0.8.20",
   settings: {
     optimizer: { enabled: true, runs: 200 },
     evmVersion: "paris",
-    // "none": bytecode does not depend on file paths, so explorer verification is an exact match.
-    metadata: { bytecodeHash: "none" },
   },
 } as const;
 

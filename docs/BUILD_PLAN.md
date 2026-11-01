@@ -56,7 +56,7 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 - [x] Registry tests incl. `FakeOwned` (test-only) rejected with `CodeMismatch` (11 tests)
 - [x] `scripts/export.ts`: deploy each template on the in-process network, measure `deployGas`, assert codehash, write `src/generated/templates.json` (schema §7)
 - [x] `scripts/deploy-registry.ts`: checks templates.json is fresh, deploys with its hashes, writes `src/generated/deployments.json` (read by `src/config/addresses.ts`)
-- [x] Deploy the registry on **testnet**: `0xE310126CF53AeE93185Aae969a619cb402bEB472` (CONTRACTS.md §8)
+- [x] Deploy the registry on **testnet**: v2 `0x4c6F375aE291886322138a60EaC565978AAb80BC` (CONTRACTS.md §8)
 - [x] Check on testnet with 2 wallets: `scripts/smoke.ts` deploys all 5 templates, registers them, proves 4 rejection paths, votes + signs from wallet #2, reads `stats()`
 
 **Accept:** `templates.json` exists and is valid. The testnet registry address resolves on scan.bohr.life. Registering a real contract succeeds and a fake one fails.
@@ -127,7 +127,7 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 ## P7 · Verify helper + My launches
 
 - [x] `/c/[address]/verify`: settings ledger, ABI-encoded constructor args (read back via each template's `readArgs`), downloadable Standard JSON input, source, steps for Blockscout
-- [x] Verify one testnet contract using only the helper's output: Poll `0x85f9…5dEC` verified on scan.bohr.life via the Blockscout API (standard-input). Result is a **partial** match, because templates are compiled with `bytecodeHash: none`; copy updated to say so.
+- [x] Verify one testnet contract using only the helper's output: first with `bytecodeHash: none` → only a partial match; switched to isolated solc-js builds with `ipfs` (registry v2) → Poll `0x7DCb…1343` **fully verified** on scan.bohr.life using only the helper's standard-JSON + args.
 - [x] `/my`: "Listed" (from `launchesOf`) and "Not listed yet" (localStorage) with `Register now`. Empty states. Connect prompt when disconnected.
 
 **Accept:** a testnet contract verifies on scan.bohr.life using only copied values from the helper.

@@ -2,18 +2,9 @@ import { AbiCoder } from "ethers";
 import { compilerSettings } from "./defineTemplate";
 import type { TemplateArtifact } from "./types";
 
-/** Solidity standard-JSON input that reproduces the deployed bytecode exactly (incl. `bytecodeHash: none`). */
+/** The exact solc input that produced the deployed bytecode (from the export script). */
 export function standardInput(artifact: TemplateArtifact) {
-  return {
-    language: "Solidity",
-    sources: { [artifact.fileName]: { content: artifact.source } },
-    settings: {
-      optimizer: compilerSettings.optimizer,
-      evmVersion: compilerSettings.evmVersion,
-      metadata: { bytecodeHash: compilerSettings.bytecodeHash },
-      outputSelection: { "*": { "*": ["abi", "evm.bytecode", "evm.deployedBytecode", "metadata"] } },
-    },
-  };
+  return artifact.standardInput;
 }
 
 /** ABI-encoded constructor arguments, without the 0x prefix (what explorers expect). */

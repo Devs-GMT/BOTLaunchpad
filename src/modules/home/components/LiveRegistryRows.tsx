@@ -7,7 +7,7 @@ import { relativeTime } from "@/lib/format";
 import { useNow } from "@/lib/useNow";
 import { templateById } from "@/templates";
 import { useRecentLaunches } from "@/web3";
-import { liveNetwork } from "../liveNetwork";
+import { liveNetwork } from "@/config/addresses";
 
 const ROWS = 3;
 

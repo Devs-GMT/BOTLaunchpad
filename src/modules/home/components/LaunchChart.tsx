@@ -4,7 +4,7 @@ import { Kicker, Skeleton } from "@/components/ui";
 import { formatNumber } from "@/lib/format";
 import { allTemplates } from "@/templates";
 import { useRegistryStats } from "@/web3";
-import { liveNetwork } from "../liveNetwork";
+import { liveNetwork } from "@/config/addresses";
 
 const axisLabel: Record<string, string> = { todo: "To-do", "check-in": "Check-in" };
 

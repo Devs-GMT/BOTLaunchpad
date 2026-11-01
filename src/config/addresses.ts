@@ -19,3 +19,6 @@ export function registryAddress(network: Pick<NetworkConfig, "chainId">): `0x${s
  * (URLs without `?net=` still mean Mainnet: see DEFAULT_NETWORK.)
  */
 export const DEFAULT_LAUNCH_NETWORK: NetworkKey = byChain[String(networks.mainnet.chainId)] ? "mainnet" : "testnet";
+
+/** Where live numbers (home page, footer status row) come from: the network people launch on. */
+export const liveNetwork = networks[DEFAULT_LAUNCH_NETWORK];

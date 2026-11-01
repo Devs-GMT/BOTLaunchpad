@@ -6,7 +6,7 @@ import { Skeleton, StatusDot } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { formatNumber } from "@/lib/format";
 import { useBlockNumber } from "@/web3";
-import { liveNetwork } from "../liveNetwork";
+import { liveNetwork } from "@/config/addresses";
 import { BlockTag } from "./BlockTag";
 
 // BOT Chain produces a block every ~0.75 s: 80 blocks ≈ 1 minute, 4,800 ≈ 1 hour, 115,200 ≈ 1 day.

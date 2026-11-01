@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui";
 import { formatNumber, relativeTime } from "@/lib/format";
 import { useNow } from "@/lib/useNow";
 import { useBlockSummary, type BlockSummary } from "@/web3";
-import { liveNetwork } from "../liveNetwork";
+import { liveNetwork } from "@/config/addresses";
 
 /** Floating label on the lifted plane: real block number, transaction count and age. */
 interface BlockTagProps {

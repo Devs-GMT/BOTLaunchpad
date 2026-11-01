@@ -69,7 +69,7 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 - [x] `components/ui` form set: Field, TextInput, TextArea, DateTimeInput, NumberInput, ListInput, SegmentedControl, Toggle
 - [x] `components/ui`: Tabs, Stepper, Dialog (Toast + Tooltip deferred to the first screen that needs them, P5)
 - [x] `components/graphics`: LogoMark (3×3 dot glyph), PixelIcon (key, shield, lock, map, check, wallet, code), DotMatrixStack (ambient twinkle/breathe + block-tick flash), DotWorldMap (rasterised from coarse outlines), Watermark. GridBackdrop = `pixel-grid` utility on `Section grid`.
-- [x] A temporary `/kitchen` route (404 in production, removed in P9) that renders every primitive and variant. (`_kitchen` is a private folder in the App Router, so it can't be a route.)
+- [x] A temporary `/kitchen` route (removed in P9) that renders every primitive and variant. (`_kitchen` is a private folder in the App Router, so it can't be a route.)
 
 **Accept:** the kitchen page looks right at 375px and 1440px. No arbitrary hex values (`grep -r "\[#" src` is empty). No `rounded-xl/2xl`.
 
@@ -151,17 +151,17 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 ## P9 · Shell, states, polish
 
 - [x] Navbar: transparent at the top → paper-50 + hairline after scroll. Mobile sheet. Wallet chip + `Launch a contract →`. (Built early in P5.)
-- [ ] Footer per PRD §12: status row (live dot, BOT Chain logo → botchain.ai, chain id, live block, launched count, registry address copy, View on explorer →), 4 link columns, "Built on BOT Chain" hex badge, giant watermark, bottom mono row. Grey dot + "RPC not responding" on failure.
-- [ ] Walk through every state in PRD §10 and tick it here:
-  - [ ] No MetaMask · [ ] Wrong network · [ ] Not enough BOT (faucet / get BOT link)
-  - [ ] Form errors · [ ] Deploy rejected/failed · [ ] Register skipped/failed → Register now
-  - [ ] Registry rejections (not owner / unknown code / already registered)
-  - [ ] Not a Launchpad contract · [ ] Ended/closed/full/already-done disabled reasons
-  - [ ] Empty Tip Jar withdraw disabled · [ ] Slow RPC skeletons · [ ] Pending tx progress + link
-- [ ] Safety copy: "Templates are provided as-is. Start on Testnet. Don't use Tip Jar for large amounts."
-- [ ] Keyboard pass (focus rings visible, tab order), `aria-live` for tx progress, colour contrast AA
-- [ ] Metadata + OG image per route; `/c/[address]` title = contract name when resolved
-- [ ] Remove `/kitchen` (`app/kitchen`, `src/modules/kitchen`)
+- [x] Footer per PRD §12: status row (live dot, BOT Chain hex → botchain.ai, chain id, live block, launched count, registry address copy, View on explorer →), 4 link columns, "Built on BOT Chain" hex badge, giant watermark, bottom mono row. Grey dot + "RPC not responding" on failure. No Privacy/Terms links: there are no such pages, so the row says "No accounts · No fees · No tracking" instead. The status row reads the launch network (`liveNetwork` in `config/addresses.ts`).
+- [x] Walk through every state in PRD §10 and tick it here (most were proven by the P5–P7 E2E runs):
+  - [x] No MetaMask · [x] Wrong network · [x] Not enough BOT (faucet / get BOT link)
+  - [x] Form errors · [x] Deploy rejected/failed · [x] Register skipped/failed → Register now
+  - [x] Registry rejections (not owner / unknown code / already registered)
+  - [x] Not a Launchpad contract · [x] Ended/closed/full/already-done disabled reasons
+  - [x] Empty Tip Jar withdraw disabled · [x] Slow RPC skeletons · [x] Pending tx progress + link
+- [x] Safety copy: "Templates are provided as-is. Start on Testnet. Don't use Tip Jar for large amounts." (picker, wizard on every size, home FAQ, footer)
+- [x] Keyboard pass (focus rings visible, tab order), `aria-live` for tx progress, colour contrast AA. Hero timeline: buttons + ↑/↓.
+- [x] Metadata + OG image per route (site card + one per template via `next/og`, code in `src/modules/og`); `/c/[address]` title = contract name when resolved
+- [x] Remove `/kitchen` (`app/kitchen`, `src/modules/kitchen`)
 
 **Accept:** a full run on a 375px phone with MetaMask mobile's in-app browser works end to end.
 

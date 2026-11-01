@@ -15,14 +15,17 @@ BOTLaunchpad/
 │  │  └─ verify/page.tsx        # → modules/verify     VerifyPage
 │  ├─ my/page.tsx               # → modules/my-launches MyLaunchesPage
 │  ├─ not-found.tsx             # → components/layout  NotFound
-│  └─ icon.svg, opengraph-image.png
+│  ├─ opengraph-image.tsx       # → modules/og (site card); launch/[template]/opengraph-image.tsx per template
+│  └─ icon.svg
 │
 ├─ src/
 │  ├─ modules/                  # FEATURES: one folder per product area
 │  │  ├─ home/
 │  │  │  ├─ HomePage.tsx
 │  │  │  ├─ sections/           # Hero, BuiltWith, Problem, SideBySide, LaunchStats,
-│  │  │  │                      # Ownership, TemplateShowcase, ClosingCta
+│  │  │  │                      # Ownership, Showcase, ClosingCta (server components)
+│  │  │  ├─ components/         # live-data islands: BlockTimeline, BlockTag, LiveRegistryRows,
+│  │  │  │                      # LaunchChart, OwnershipCycle, NetworkLaunchButton, LaunchCostRange
 │  │  │  └─ index.ts
 │  │  ├─ launch/
 │  │  │  ├─ TemplatePickerPage.tsx
@@ -40,10 +43,11 @@ BOTLaunchpad/
 │  │  │  ├─ VerifyPage.tsx
 │  │  │  ├─ components/         # SettingsTable, CopyBlock, VerifySteps
 │  │  │  └─ index.ts
-│  │  └─ my-launches/
-│  │     ├─ MyLaunchesPage.tsx
-│  │     ├─ components/         # LaunchRow, PendingRow
-│  │     └─ index.ts
+│  │  ├─ my-launches/
+│  │  │  ├─ MyLaunchesPage.tsx
+│  │  │  ├─ components/         # LaunchRow, PendingRow
+│  │  │  └─ index.ts
+│  │  └─ og/                    # next/og share cards (inline styles mirror the @theme tokens)
 │  │
 │  ├─ templates/                # DOMAIN: the 5 templates as data + adapters
 │  │  ├─ types.ts               # TemplateDefinition, FieldConfig, TemplateSlug
@@ -69,7 +73,7 @@ BOTLaunchpad/
 │  │  ├─ web3/                  # wallet-aware composites
 │  │  │  ConnectButton, NetworkBadge, AddressPill, TxLink, ExplorerLink,
 │  │  │  WrongNetworkBanner, InstallMetaMask, GasLine
-│  │  └─ layout/                # Navbar, Footer, FooterStatusRow, PageShell, NotFound
+│  │  └─ layout/                # Navbar, Footer, FooterStatus, BotChainHex, PageShell, NotFound
 │  │
 │  ├─ web3/                     # chain access (framework-agnostic where possible)
 │  │  ├─ providers.ts           # cached JsonRpcProvider per network (reads)

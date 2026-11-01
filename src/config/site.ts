@@ -19,7 +19,8 @@ export const external = {
   faucet: "https://faucet.botchain.ai",
   metamask: "https://metamask.io/download/",
   remix: "https://remix.ethereum.org",
-  github: "https://github.com/",
+  github: "https://github.com/Devs-GMT/BOTLaunchpad",
+  templateSource: "https://github.com/Devs-GMT/BOTLaunchpad/tree/main/contracts/contracts/templates",
   x: "https://x.com/BOTChain_ai",
 } as const;
 

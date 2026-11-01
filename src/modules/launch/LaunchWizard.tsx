@@ -86,7 +86,7 @@ export function LaunchWizard({ slug }: { slug: string }) {
           <div className="hidden lg:block">
             <Stepper steps={steps} />
           </div>
-          <p className="hidden font-mono text-micro uppercase text-ink-500 lg:block">{safetyNote}</p>
+          <p className="font-mono text-micro uppercase text-ink-500">{safetyNote}</p>
         </aside>
 
         <section className="lg:col-span-8" aria-label={labels[stepIndex]}>

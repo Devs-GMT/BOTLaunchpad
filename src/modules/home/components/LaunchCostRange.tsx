@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui";
 import { formatBOT } from "@/lib/format";
 import { allTemplates } from "@/templates";
 import { useGasPrice } from "@/web3";
-import { liveNetwork } from "../liveNetwork";
+import { liveNetwork } from "@/config/addresses";
 
 const gas = allTemplates.map((t) => BigInt(t.artifact.deployGas));
 const min = gas.reduce((a, b) => (b < a ? b : a));

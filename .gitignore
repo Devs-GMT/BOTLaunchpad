@@ -1,0 +1,25 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# next
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# contracts
+contracts/artifacts/
+contracts/cache/
+contracts/typechain-types/
+contracts/coverage/
+
+# env
+.env
+.env*.local
+contracts/.env
+
+# misc
+.DS_Store
+*.log
+.vercel

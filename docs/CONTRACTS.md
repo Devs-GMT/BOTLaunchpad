@@ -24,7 +24,7 @@ solidity: {
   settings: { optimizer: { enabled: true, runs: 200 }, evmVersion: 'paris', metadata: { bytecodeHash: 'none' } },
 }
 ```
-`bytecodeHash: 'none'` keeps the metadata IPFS hash (which embeds the source path) out of the bytecode, so explorer verification is an exact match whatever the uploaded file is named. The Verify helper shows these exact values, including "Metadata hash: none". Changing any of them changes every code hash, which means a new registry.
+`bytecodeHash: 'none'` keeps the metadata IPFS hash (which embeds the source path) out of the bytecode, so verification works whatever the uploaded file is named. Trade-off, confirmed on Blockscout 2026-11-01: explorers can only report a **partial** match (bytecode + settings identical, no metadata fingerprint to compare). The Verify helper shows these exact values, including "Metadata hash: none". Changing any of them changes every code hash, which means a new registry.
 
 ## 3. Shared template rules
 

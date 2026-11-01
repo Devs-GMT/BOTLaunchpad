@@ -21,6 +21,7 @@ export const guestbook = defineTemplate({
     { label: "Message length", value: "Up to 140 bytes" },
   ],
   feedName: (v) => v.title,
+  readArgs: async (c) => [await c.getFunction("name")()],
   errors: {
     AlreadySigned: "This wallet already signed the guestbook.",
     EmptyText: "Write a message first.",

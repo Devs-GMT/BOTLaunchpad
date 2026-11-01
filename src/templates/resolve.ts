@@ -3,7 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Contract } from "ethers";
 import { networks, type NetworkConfig } from "@/config/networks";
-import { codeHashes, templateById, type Template } from "@/templates";
+import { codeHashes, templateById } from "./index";
+import type { Template } from "./types";
 import { getLaunchByAddress, hasRegistry, lookupCode, readProvider, type Launch } from "@/web3";
 
 export type Resolved =

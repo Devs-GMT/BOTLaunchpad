@@ -35,6 +35,7 @@ export const tipJar = defineTemplate({
     { label: "Who can withdraw", value: "Only you" },
   ],
   feedName: (v) => v.name,
+  readArgs: async (c) => [await c.getFunction("name")(), await c.getFunction("thankYou")()],
   errors: {
     TipTooSmall: "The minimum tip is 0.001 BOT.",
     NotOwner: "Only the owner can withdraw.",

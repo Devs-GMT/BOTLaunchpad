@@ -8,7 +8,7 @@ import { ContractHeader } from "./components/ContractHeader";
 import { NotLaunchpad } from "./components/NotLaunchpad";
 import { RegisterNow } from "./components/RegisterNow";
 import { SuccessPanel } from "./components/SuccessPanel";
-import { useResolveContract } from "./hooks/useResolveContract";
+import { useResolveContract } from "@/templates/resolve";
 
 export interface ContractViewProps {
   address: `0x${string}`;

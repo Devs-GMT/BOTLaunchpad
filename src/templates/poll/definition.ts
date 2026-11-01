@@ -50,6 +50,7 @@ export const poll = defineTemplate({
     { label: "Who can vote", value: "Anyone, once per wallet" },
   ],
   feedName: (v) => v.question,
+  readArgs: async (c) => [await c.getFunction("name")(), [...(await c.getFunction("getOptions")())], await c.getFunction("endsAt")()],
   errors: {
     PollClosed: "This poll is closed.",
     AlreadyVoted: "This wallet already voted.",

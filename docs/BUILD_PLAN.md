@@ -126,9 +126,9 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 
 ## P7 · Verify helper + My launches
 
-- [ ] `/c/[address]/verify`: settings ledger, ABI-encoded constructor args (CopyBlock), source (CopyBlock), steps for scan.botchain.ai
-- [ ] Verify one testnet contract manually using only the helper's output, and fix the steps text to match the real explorer form
-- [ ] `/my`: "Listed" (from `launchesOf`) and "Not listed yet" (localStorage) with `Register now`. Empty states. Connect prompt when disconnected.
+- [x] `/c/[address]/verify`: settings ledger, ABI-encoded constructor args (read back via each template's `readArgs`), downloadable Standard JSON input, source, steps for Blockscout
+- [x] Verify one testnet contract using only the helper's output: Poll `0x85f9…5dEC` verified on scan.bohr.life via the Blockscout API (standard-input). Result is a **partial** match, because templates are compiled with `bytecodeHash: none`; copy updated to say so.
+- [x] `/my`: "Listed" (from `launchesOf`) and "Not listed yet" (localStorage) with `Register now`. Empty states. Connect prompt when disconnected.
 
 **Accept:** a testnet contract verifies on scan.bohr.life using only copied values from the helper.
 

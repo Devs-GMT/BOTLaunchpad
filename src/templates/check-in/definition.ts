@@ -41,6 +41,8 @@ export const checkIn = defineTemplate({
     { label: "Max attendees", value: v.maxAttendees.toLocaleString("en-US") },
   ],
   feedName: (v) => v.name,
+  readArgs: async (c) =>
+    Promise.all(["name", "startsAt", "endsAt", "maxAttendees"].map((fn) => c.getFunction(fn)())),
   errors: {
     NotStarted: "Check-in hasn't opened yet.",
     Ended: "Check-in has closed.",

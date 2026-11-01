@@ -1,4 +1,4 @@
-import type { InterfaceAbi } from "ethers";
+import type { Contract, InterfaceAbi } from "ethers";
 import type { ComponentType } from "react";
 import type { z } from "zod";
 import type { NetworkConfig } from "@/config/networks";
@@ -71,6 +71,8 @@ export interface TemplateDefinition<S extends z.ZodType = z.ZodType> {
   feedName: (values: z.output<S>) => string;
   /** Custom error name → friendly copy. */
   errors: Record<string, string>;
+  /** Read the constructor args back from a deployed contract's getters (Verify helper). */
+  readArgs: (contract: Contract) => Promise<unknown[]>;
 }
 
 export type Template<S extends z.ZodType = z.ZodType> = TemplateDefinition<S> & {

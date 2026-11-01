@@ -36,6 +36,7 @@ export const todo = defineTemplate({
     { label: "Who can tick tasks", value: "You, or the wallet that added the task" },
   ],
   feedName: (v) => v.name,
+  readArgs: async (c) => [await c.getFunction("name")(), await c.getFunction("openToAll")()],
   errors: {
     NotAllowed: "This wallet isn't allowed to do that on this board.",
     NoSuchTask: "That task doesn't exist.",

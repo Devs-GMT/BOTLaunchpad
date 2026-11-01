@@ -91,17 +91,19 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P5 · Launch wizard
 
-- [ ] `templates/types.ts`, `defineTemplate.ts`, `registry.ts` (joins definitions with `generated/templates.json` by id)
-- [ ] 5 `definition.ts` files: meta, zod schema (byte caps, poll options 2–6, future dates), fields, defaults, `toArgs`, `feedName`, `errors`
-- [ ] `/launch`: TemplatePickerPage with 5 FolderCards (functions count + est. gas from `deployGas × gasPrice`)
-- [ ] `/launch/[template]`: `generateStaticParams` for the 5 slugs. Unknown slug → `notFound()`
-- [ ] `useWizard` with sessionStorage persistence
-- [ ] Generic `TemplateForm` driven by `fields` + live validation + byte counters
-- [ ] Review: Summary tab, View code tab (shiki, lazy) + highlighted constructor-call block, Network tab (segmented switch, "Try Testnet first — it's free" + faucet link), live `estimateGas`
-- [ ] `useDeploy`: ContractFactory deploy via useTxFlow, then save pending to localStorage
-- [ ] `useRegister`: register via useTxFlow, then remove pending and invalidate queries. Show the note "2 quick transactions: one creates your contract, one lists it." and a "Skip for now" option.
-- [ ] LaunchProgress stepper: Waiting for confirmation → Deploying… (tx link) → Live at 0x… ✓ → Listing… → Listed ✓
-- [ ] On finish, go to `/c/<addr>?net=<net>&new=1`
+- [x] `templates/types.ts`, `defineTemplate.ts`, `registry.ts` (joins definitions with `generated/templates.json` by id)
+- [x] 5 `definition.ts` files: meta, zod schema (byte caps, poll options 2–6, future dates), fields, defaults, `toArgs`, `feedName`, `errors`
+- [x] `/launch`: TemplatePickerPage with 5 FolderCards (functions count + est. gas from `deployGas × gasPrice`)
+- [x] `/launch/[template]`: `generateStaticParams` for the 5 slugs. Unknown slug → `notFound()`
+- [x] `useWizard` with sessionStorage persistence
+- [x] Generic `TemplateForm` driven by `fields` + live validation + byte counters
+- [x] Review: Summary tab, View code tab (shiki, lazy) + highlighted constructor-call block, Network tab (segmented switch, "Try Testnet first — it's free" + faucet link), live `estimateGas`
+- [x] `useDeploy`: ContractFactory deploy via useTxFlow, then save pending to localStorage
+- [x] `useRegister`: register via useTxFlow, then remove pending and invalidate queries. Show the note "2 quick transactions: one creates your contract, one lists it." and a "Skip for now" option.
+- [x] LaunchProgress stepper: Waiting for confirmation → Deploying… (tx link) → Live at 0x… ✓ → Listing… → Listed ✓
+- [x] On finish, go to `/c/<addr>?net=<net>&new=1`
+
+_Verified 2026-11-01 with a headless E2E (Playwright + an injected EIP-1193 wallet backed by the burner key): all 5 templates launched and listed through the UI on testnet; validation, refresh persistence and wallet rejection → retry checked._
 
 **Accept:** on testnet, each of the 5 templates deploys from the browser, registers, and shows up in `stats()`. Rejecting either MetaMask prompt shows a retry. Refreshing mid-wizard keeps the values.
 
@@ -144,7 +146,7 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P9 · Shell, states, polish
 
-- [ ] Navbar: transparent at the top → paper-50 + hairline after scroll. Mobile sheet. Wallet chip + `Launch a contract →`.
+- [x] Navbar: transparent at the top → paper-50 + hairline after scroll. Mobile sheet. Wallet chip + `Launch a contract →`. (Built early in P5.)
 - [ ] Footer per PRD §12: status row (live dot, BOT Chain logo → botchain.ai, chain id, live block, launched count, registry address copy, View on explorer →), 4 link columns, "Built on BOT Chain" hex badge, giant watermark, bottom mono row. Grey dot + "RPC not responding" on failure.
 - [ ] Walk through every state in PRD §10 and tick it here:
   - [ ] No MetaMask · [ ] Wrong network · [ ] Not enough BOT (faucet / get BOT link)

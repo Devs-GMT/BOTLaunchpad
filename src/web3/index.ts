@@ -17,4 +17,4 @@ export {
   type RegistryStats,
 } from "./registry";
 export { lookupCode, type CodeLookup } from "./codeHash";
-export { queryKeys, useBlockNumber, useRegistryStats, useRecentLaunches, useLaunchesOf } from "./queries";
+export { queryKeys, useBlockNumber, useRegistryStats, useRecentLaunches, useLaunchesOf, useGasPrice, useBalance } from "./queries";

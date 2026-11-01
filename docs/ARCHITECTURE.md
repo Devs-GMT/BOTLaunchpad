@@ -58,6 +58,7 @@ BOTLaunchpad/
 │  │  └─ check-in/  (definition.ts, CheckInInteract.tsx)
 │  │
 │  ├─ components/
+│  │  ├─ code/                  # CodeView (shiki, lazy): shared by launch + verify
 │  │  ├─ ui/                    # design-system primitives (no web3, no templates)
 │  │  │  Button, LinkButton, Kicker, TwoToneHeading, Section, Container,
 │  │  │  FolderCard, NotchCard, DashedBox, Chip, StatusDot, Pill, Field,
@@ -132,31 +133,30 @@ ESLint enforces the boundaries through `no-restricted-imports` patterns (see BUI
 ## 3. The template contract (frontend side)
 
 ```ts
-// src/templates/types.ts
-export type TemplateSlug = 'guestbook' | 'poll' | 'todo' | 'tip-jar' | 'check-in';
-
-export interface TemplateDefinition<S extends z.ZodTypeAny = z.ZodTypeAny> {
+// src/templates/types.ts (abridged)
+export interface TemplateDefinition<S extends z.ZodType> {
   id: 1 | 2 | 3 | 4 | 5;                 // = TEMPLATE_ID in Solidity
   slug: TemplateSlug;
-  title: string;                         // "Poll"
+  title: string;
+  icon: "book" | "bars" | "list" | "coin" | "pin";   // PixelIcon
   category: 'COMMUNITY' | 'TEAMS' | 'CREATORS' | 'EVENTS';
   useCase: string;                       // one line for the card
-  cover: string;                         // /images/templates/poll.jpg
-  schema: S;                             // zod: friendly form values
-  fields: FieldConfig[];                 // render order + labels + help text
-  defaults: z.input<S>;
+  description: string;                   // paragraph on the form step
+  schema: S;                             // zod: byte caps, dates, option rules
+  fields: readonly FieldConfig[];        // render order + labels + hints
+  defaults: () => z.input<S>;
   toArgs: (v: z.output<S>) => unknown[]; // → constructor args, in order
-  argLabels: string[];                   // shown in the Review "constructor call"
-  feedName: (v: z.output<S>) => string;  // default registry name
+  argNames: readonly string[];           // shown in the Review "constructor call"
+  summary: (v: z.output<S>) => SummaryRow[];
+  feedName: (v: z.output<S>) => string;  // default registry name (clamped to 64 bytes)
   errors: Record<string, string>;        // CustomError name → friendly copy
-  Interact: React.ComponentType<{ address: `0x${string}`; chainId: number }>;
-  artifact: TemplateArtifact;            // joined from generated/templates.json by id
 }
+// defineTemplate() joins the definition with its artifact from generated/templates.json by id.
 ```
 
 `FieldConfig` supports `text | textarea | datetime | number | list (min/max items) | segmented`. `TemplateForm` renders any definition generically, so no per-template form components exist.
 
-`Interact` components are lazy-loaded (`next/dynamic`) so the home and launch pages don't ship five interact UIs.
+Definitions stay free of React so server components can import them. The Interact UIs live next to each definition (`templates/<slug>/<Name>Interact.tsx`) and are mapped in `templates/interact.ts` with `next/dynamic`, so only the contract page loads them.
 
 ## 4. Data flow
 

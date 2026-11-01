@@ -50,3 +50,21 @@ export function useLaunchesOf(network: NetworkConfig, owner: string | null | und
     enabled: hasRegistry(network) && Boolean(owner),
   });
 }
+
+/** Current gas price in wei. BOT Chain sits at a flat 20 gwei, so a minute of staleness is fine. */
+export function useGasPrice(network: NetworkConfig) {
+  return useQuery({
+    queryKey: ["gasPrice", network.chainId] as const,
+    queryFn: async () => (await readProvider(network).getFeeData()).gasPrice ?? 20_000_000_000n,
+    staleTime: 60_000,
+  });
+}
+
+export function useBalance(network: NetworkConfig, address: string | null | undefined) {
+  return useQuery({
+    queryKey: ["balance", network.chainId, address?.toLowerCase() ?? ""] as const,
+    queryFn: () => readProvider(network).getBalance(address!),
+    enabled: Boolean(address),
+    staleTime: 10_000,
+  });
+}

@@ -174,8 +174,10 @@ Written by `contracts/scripts/export.ts` after `compile`. The frontend imports i
 
 | Network | LaunchpadRegistry | Deployed | Tx |
 |---|---|---|---|
-| Testnet (968) | _tbd_ | | |
+| Testnet (968) | [`0xE310126CF53AeE93185Aae969a619cb402bEB472`](https://scan.bohr.life/address/0xE310126CF53AeE93185Aae969a619cb402bEB472) | 2026-11-01, block 28891895 | `0xe525e300…eaa20136b` |
 | Mainnet (677) | _tbd_ | | |
+
+Testnet smoke launches (`pnpm -C contracts smoke --network botTestnet`, 2026-11-01): Guestbook `0x1c15E67b1bacdeCBE2Ba3D80048F20Ba272c3d35` · Poll `0x1Db7B570c0DA89F4468C97B2eF2A4780EdD85a40` · TodoBoard `0xD4742B0Af52bA9f050D6c35A4f0238679ec17B4e` · TipJar `0x9C3F89409c7fdCbF49CA59487c69586469417F43` · EventCheckIn `0x64BB653506be04B5CAbb1521bEc70c458665e4dF`. Registry rejected wrong id (`CodeMismatch`), relisting (`AlreadyRegistered`), an EOA (`NotAContract`) and a non-owner (`NotOwner`). Register costs ~200–234k gas.
 
 Seed launches (mainnet), one per template: _tbd_.
 

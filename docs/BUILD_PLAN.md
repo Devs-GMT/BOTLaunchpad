@@ -38,15 +38,15 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P1 · Template contracts
 
-- [ ] `contracts/` Hardhat TS package: networks `botTestnet` (968, rpc.bohr.life) and `botMainnet` (677, rpc.botchain.ai), compiler settings from [CONTRACTS.md §2](CONTRACTS.md), key loaded from a `contracts/.env` `DEPLOYER_KEY` (gitignored)
-- [ ] `Guestbook.sol` + tests
-- [ ] `Poll.sol` + tests (option bounds, end time, close, double vote)
-- [ ] `TodoBoard.sol` + tests (openToAll on/off, toggle permissions)
-- [ ] `TipJar.sol` + tests (min tip, withdraw by owner only, empty withdraw, balance zero after withdraw, plain transfer reverts)
-- [ ] `EventCheckIn.sol` + tests (before/inside/after window via `time.increaseTo`, cap, double check-in)
-- [ ] Every test uses ≥ 2 signers and hits every custom error
-- [ ] Test that two deployments with different args share one `keccak256(getCode)`
-- [ ] Gas report enabled, which records `deployGas` per template
+- [x] `contracts/` Hardhat 3 TS package: networks `botTestnet` (968, rpc.bohr.life) and `botMainnet` (677, rpc.botchain.ai), compiler settings from [CONTRACTS.md §2](CONTRACTS.md), key via `configVariable("DEPLOYER_KEY")` (env var or `hardhat keystore set DEPLOYER_KEY`)
+- [x] `Guestbook.sol` + tests
+- [x] `Poll.sol` + tests (option bounds, end time, close, double vote)
+- [x] `TodoBoard.sol` + tests (openToAll on/off, toggle permissions)
+- [x] `TipJar.sol` + tests (min tip, withdraw by owner only, empty withdraw, balance zero after withdraw, plain transfer reverts)
+- [x] `EventCheckIn.sol` + tests (before/inside/after window via `time.increaseTo`, cap, double check-in)
+- [x] Every test uses ≥ 2 signers (`vm.prank`) and hits every custom error. Tests are Solidity (forge-std), the Hardhat 3 default for unit tests.
+- [x] Test that two deployments with different args share one `keccak256(getCode)`
+- [x] ~~Gas report~~ → `deployGas` is measured by `scripts/export.ts` instead (moved to P2)
 
 **Accept:** `pnpm -C contracts test` is green. Code hashes are identical across instances of a template.
 

@@ -1,5 +1,10 @@
 import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
+import { existsSync } from "node:fs";
 import { configVariable, defineConfig } from "hardhat/config";
+
+// DEPLOYER_KEY lives in the repo-root .env.local (gitignored). Not NEXT_PUBLIC_, so Next never exposes it.
+const rootEnv = new URL("../.env.local", import.meta.url);
+if (existsSync(rootEnv)) process.loadEnvFile(rootEnv);
 
 // Fixed compiler settings: every template code hash depends on them.
 // Changing anything here requires a new LaunchpadRegistry (docs/CONTRACTS.md §2).

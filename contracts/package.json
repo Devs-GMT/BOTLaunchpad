@@ -7,7 +7,8 @@
     "compile": "hardhat build",
     "test": "hardhat test",
     "export": "hardhat run scripts/export.ts",
-    "deploy:registry": "hardhat run scripts/deploy-registry.ts"
+    "deploy:registry": "hardhat run scripts/deploy-registry.ts",
+    "balance": "hardhat run scripts/balance.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^4.2.2",

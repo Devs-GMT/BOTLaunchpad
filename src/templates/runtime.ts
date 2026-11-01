@@ -2,7 +2,7 @@
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Contract, Interface, type ContractTransactionResponse, type Overrides } from "ethers";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import type { NetworkConfig } from "@/config/networks";
 import { readProvider, useTxFlow, useWallet } from "@/web3";
 import type { TemplateArtifact } from "./types";
@@ -61,14 +61,4 @@ export function useTemplateWrite(template: RuntimeTemplate, address: string, net
 export function lastPage(total: number, size: number) {
   const from = Math.max(0, total - size);
   return { from, count: total - from };
-}
-
-/** Unix seconds, refreshed every `everyMs` so time-based states (opens in…, ended) update on their own. */
-export function useNow(everyMs = 15_000) {
-  const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
-  useEffect(() => {
-    const t = setInterval(() => setNow(Math.floor(Date.now() / 1000)), everyMs);
-    return () => clearInterval(t);
-  }, [everyMs]);
-  return now;
 }

@@ -4,7 +4,8 @@ import { DashedBox, Kicker, LedgerRow, NotchCard, Pill, Skeleton, StatusDot } fr
 import { ActionButton, AddressPill } from "@/components/web3";
 import { formatNumber, relativeTime } from "@/lib/format";
 import { structs, useWallet } from "@/web3";
-import { lastPage, useNow, useTemplateRead, useTemplateWrite } from "../runtime";
+import { useNow } from "@/lib/useNow";
+import { lastPage, useTemplateRead, useTemplateWrite } from "../runtime";
 import type { InteractProps } from "../types";
 import { checkIn } from "./definition";
 

@@ -30,4 +30,5 @@ export {
 export { Tabs, type TabItem, type TabsProps } from "./Tabs";
 export { Stepper, type StepItem, type StepStatus, type StepperProps } from "./Stepper";
 export { Dialog, type DialogProps } from "./Dialog";
+export { Reveal, type RevealProps } from "./Reveal";
 export * from "./icons";

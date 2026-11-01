@@ -134,17 +134,19 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 
 ## P8 · Home page
 
-- [ ] S1 Hero: 3-line headline, body, two CTAs. DotMatrixStack + live block timeline.
-- [ ] S2 Built-with strip (dashed slots)
-- [ ] S3 Problem: 3 FolderCards with photos + captions
-- [ ] S4 Side-by-side: Old way (paper-300, ember dot, 8 steps) vs Launchpad (lilac-200, mint dot, 3 steps + live registry rows from `getLaunches`)
-- [ ] S5 Launch stats: thin bar chart per template from `stats()` + total counter (Skeleton while loading)
-- [ ] S6 Ownership: coal NotchCard, pixel key/shield, cycling 01 OWN · 02 VERIFY · 03 OPEN
-- [ ] S7 Template showcase: horizontal scroll-snap FolderCards → `/launch/[slug]`
-- [ ] S8 Closing CTA: coal band, DotWorldMap, Testnet (teal) / Mainnet (outline-light) buttons, FAQ row (6 items, `<details>` accordion)
-- [ ] Section entrance animation + reduced-motion handling
+- [x] S1 Hero: 3-line headline, body, two CTAs. DotMatrixStack + live block timeline.
+- [x] S2 Built-with strip (dashed slots)
+- [x] S3 Problem: 3 FolderCards + captions. Media is pixel art on the grid, not photos (no licensed photo set yet; swap in later if wanted)
+- [x] S4 Side-by-side: Old way (paper-300, ember dot, 8 steps) vs Launchpad (lilac-200, mint dot, 3 steps + live registry rows from `getLaunches`)
+- [x] S5 Launch stats: thin bar chart per template from `stats()` + total counter (Skeleton while loading)
+- [x] S6 Ownership: coal NotchCard, pixel key/shield, cycling 01 OWN · 02 VERIFY · 03 OPEN
+- [x] S7 Template showcase: horizontal scroll-snap FolderCards → `/launch/[slug]`
+- [x] S8 Closing CTA: coal band, DotWorldMap, Testnet (teal) / Mainnet (outline-light) buttons, FAQ row (6 items, `<details>` accordion)
+- [x] Section entrance animation (`Reveal`) + reduced-motion handling
 
 **Accept:** all 8 sections match PRD §9 copy. Live numbers come from the RPC/registry, with no hard-coded counts. Lighthouse on mobile scores ≥ 90 for performance and ≥ 95 for accessibility.
+
+> Verified: live block, registry feed, `stats()` and gas-based cost all read from testnet (the launch network until Mainnet has a registry). No horizontal overflow at 375/520/1440. Lighthouse still to run on the Vercel build (P10).
 
 ## P9 · Shell, states, polish
 

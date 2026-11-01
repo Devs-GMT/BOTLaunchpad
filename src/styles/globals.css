@@ -206,6 +206,9 @@
     font-weight: 500;
     text-wrap: balance;
   }
+  summary::-webkit-details-marker {
+    display: none;
+  }
   ::selection {
     background: var(--color-lilac-200);
     color: var(--color-ink-900);

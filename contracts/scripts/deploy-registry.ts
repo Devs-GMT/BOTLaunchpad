@@ -29,7 +29,8 @@ const balance = await ethers.provider.getBalance(deployer.address);
 console.log(`Network   ${networkName} (${chainId})`);
 console.log(`Deployer  ${deployer.address}  balance ${ethers.formatEther(balance)} BOT`);
 
-const factory = new ethers.ContractFactory(generated.registry.abi, generated.registry.bytecode, deployer);
+const registryArtifact = await hre.artifacts.readArtifact("LaunchpadRegistry");
+const factory = new ethers.ContractFactory(registryArtifact.abi, registryArtifact.bytecode, deployer);
 const registry = await factory.deploy(hashes);
 const tx = registry.deploymentTransaction();
 console.log(`Tx        ${tx?.hash}`);

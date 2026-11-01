@@ -160,10 +160,11 @@ Written by `contracts/scripts/export.ts` after `compile`. The frontend imports i
       "deployGas": 612345,              // from the gas report on hardhat network
       "source": "// SPDX-License-Identifier: MIT\n…"
     }
-  ],
-  "registry": { "abi": [ /* … */ ], "bytecode": "0x…" }
+  ]
 }
 ```
+
+`src/generated/registry.json` holds only `{ version, abi }` for the registry, so pages that only read stats (home, footer) don't ship template bytecode and sources.
 
 `src/generated/deployments.json` is written by `scripts/deploy-registry.ts`: `{ "<chainId>": { registry, blockNumber, txHash, deployedAt } }`. `src/config/addresses.ts` reads it, so the frontend never hard-codes an address.
 

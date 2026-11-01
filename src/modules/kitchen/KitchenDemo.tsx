@@ -29,6 +29,7 @@ import {
   TwoToneHeading,
 } from "@/components/ui";
 import { byteLength } from "@/lib/format";
+import { Web3Demo } from "./Web3Demo";
 
 const icons: PixelIconName[] = ["key", "shield", "lock", "check", "wallet", "code", "map"];
 
@@ -103,6 +104,7 @@ export function KitchenDemo() {
             </div>
           </div>
           <div className="flex flex-col gap-6">
+            <Web3Demo />
             <button type="button" className="cursor-pointer text-left" onClick={() => setTick((t) => t + 1)}>
               <DotMatrixStack tick={tick} />
               <Kicker className="mt-2">Click to replay the block flash · tick {tick}</Kicker>

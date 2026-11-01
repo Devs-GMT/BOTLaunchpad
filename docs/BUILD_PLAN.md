@@ -75,17 +75,17 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P4 · Web3 layer
 
-- [ ] `config/networks.ts` (both networks, `addEthereumChain` params), `config/addresses.ts`, `config/site.ts`
-- [ ] `web3/providers.ts`: memoised `JsonRpcProvider` per chainId (`staticNetwork: true`)
-- [ ] `providers/NetworkProvider`: selected network from `?net=`, then localStorage, then mainnet
-- [ ] `web3/wallet/`: EIP-6963 discovery, `WalletProvider`, `useWallet`, `switchTo` with the add-chain fallback (4902)
-- [ ] `components/web3/RequireWallet`: Install → Connect → Switch → children
-- [ ] `web3/useTxFlow.ts` state machine ([ARCHITECTURE.md §6](ARCHITECTURE.md))
-- [ ] `web3/errors.ts`: decode wallet errors (4001 rejected, insufficient funds) + custom errors via `Interface.parseError`
-- [ ] `web3/registry.ts`: typed reads + `register()`
-- [ ] `web3/codeHash.ts`: address → templateId by runtime hash
-- [ ] `web3/queries.ts`: `useBlockNumber`, `useRegistryStats`, `useLaunches`, `useLaunchesOf`
-- [ ] `components/web3`: ConnectButton (wallet chip), NetworkBadge, AddressPill, TxLink, ExplorerLink, GasLine, WrongNetworkBanner
+- [x] `config/networks.ts` (both networks, `addEthereumChain` params), `config/addresses.ts`, `config/site.ts`
+- [x] `web3/providers.ts`: memoised `JsonRpcProvider` per chainId (`staticNetwork: true`)
+- [x] ~~`providers/NetworkProvider`~~ → `web3/network.ts` `useSelectedNetwork()` (localStorage) + `networkFromParam()` for URL-addressed pages (see ARCHITECTURE §5)
+- [x] `web3/wallet/`: EIP-6963 discovery, `WalletProvider`, `useWallet`, `switchTo` with the add-chain fallback (4902)
+- [x] `components/web3/RequireWallet`: Install → Connect → Switch → children
+- [x] `web3/useTxFlow.ts` state machine ([ARCHITECTURE.md §6](ARCHITECTURE.md))
+- [x] `web3/errors.ts`: decode wallet errors (4001 rejected, insufficient funds) + custom errors via `Interface.parseError`
+- [x] `web3/registry.ts`: typed reads + `register()`
+- [x] `web3/codeHash.ts`: address → templateId by runtime hash
+- [x] `web3/queries.ts`: `useBlockNumber`, `useRegistryStats`, `useLaunches`, `useLaunchesOf`
+- [x] `components/web3`: ConnectButton (wallet chip, includes wrong-network state), RequireWallet (install → connect → switch), AddressPill, TxLink. GasLine moves to P5 with estimateGas.
 
 **Accept:** connecting MetaMask shows the chip with network + short address. Switching to testnet adds the chain if it's missing. The block number ticks on a test page with no wallet connected.
 

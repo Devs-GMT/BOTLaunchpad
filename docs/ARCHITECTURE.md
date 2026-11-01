@@ -89,9 +89,10 @@ BOTLaunchpad/
 │  │  cn.ts, format.ts (address, BOT amount, relative time), storage.ts,
 │  │  explorer.ts (tx/address URLs), share.ts, time.ts
 │  │
-│  ├─ providers/Providers.tsx   # QueryClientProvider + WalletProvider + NetworkProvider + Toaster
+│  ├─ providers/Providers.tsx   # QueryClientProvider + WalletProvider
 │  ├─ generated/                # machine-written, do not edit
-│  │  ├─ templates.json         #   by contracts/scripts/export.ts
+│  │  ├─ templates.json         #   by contracts/scripts/export.ts (templates: abi, bytecode, source)
+│  │  ├─ registry.json          #   by contracts/scripts/export.ts (registry abi only)
 │  │  └─ deployments.json       #   by contracts/scripts/deploy-registry.ts
 │  └─ styles/globals.css        # @import "tailwindcss"; @theme tokens; base layer
 │
@@ -193,7 +194,7 @@ Everything goes through TanStack Query with keys `[entity, chainId, ...args]`:
 
 ## 5. Network & wallet
 
-- `NetworkProvider` holds the *selected* network (`mainnet | testnet`). Precedence: URL `?net=`, then localStorage, then `mainnet`. The PRD's Testnet toggle writes it.
+- `useSelectedNetwork()` (`web3/network.ts`) is the network picked for launching: a `useSyncExternalStore` over localStorage, default `mainnet`. The Testnet toggle writes it. No root provider reads `?net=`, because reading search params at the root would suspend every page under Cache Components. Pages addressed by URL (`/c/[address]?net=`) read the param themselves (inside `<Suspense>`) via `networkFromParam()` and pass the network down explicitly.
 - `WalletProvider` discovers MetaMask through EIP-6963 (falls back to `window.ethereum`) and exposes `{status, address, chainId, connect, switchTo(network)}`. It listens to `accountsChanged` and `chainChanged`.
 - `switchTo` calls `wallet_switchEthereumChain` and falls back to `wallet_addEthereumChain` with the params from `config/networks.ts` on error 4902.
 - Write buttons wrap in `<RequireWallet network>`, which renders one of: Install MetaMask → Connect → Switch network → the child.

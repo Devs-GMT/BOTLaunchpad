@@ -74,14 +74,12 @@ for (const t of TEMPLATES) {
 }
 
 const registry = await hre.artifacts.readArtifact("LaunchpadRegistry");
-const out = {
-  version: 1,
-  compiler,
-  templates,
-  registry: { abi: registry.abi, bytecode: registry.bytecode },
-};
-
 await mkdir(GENERATED_DIR, { recursive: true });
-const target = new URL("templates.json", GENERATED_DIR);
-await writeFile(target, JSON.stringify(out, null, 2) + "\n");
-console.log(`\nWrote ${target.pathname}`);
+
+// Templates (ABI + bytecode + source) are only needed by launch/contract pages. The registry ABI is
+// tiny and used everywhere (home stats, footer), so it ships as its own file.
+const templatesFile = new URL("templates.json", GENERATED_DIR);
+await writeFile(templatesFile, JSON.stringify({ version: 1, compiler, templates }, null, 2) + "\n");
+const registryFile = new URL("registry.json", GENERATED_DIR);
+await writeFile(registryFile, JSON.stringify({ version: 1, abi: registry.abi }, null, 2) + "\n");
+console.log(`\nWrote ${templatesFile.pathname}\nWrote ${registryFile.pathname}`);

@@ -5,7 +5,10 @@ import type { ContractTransactionResponse } from "ethers";
 import { useCallback } from "react";
 import type { NetworkConfig } from "@/config/networks";
 import { removePending } from "@/lib/storage";
-import { queryKeys, registryContract, registryErrors, registryInterface, useTxFlow, useWallet } from "@/web3";
+import { queryKeys } from "./queries";
+import { registryContract, registryErrors, registryInterface } from "./registry";
+import { useTxFlow } from "./useTxFlow";
+import { useWallet } from "./wallet/WalletProvider";
 
 const abi = [registryInterface];
 

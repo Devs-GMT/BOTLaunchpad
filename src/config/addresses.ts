@@ -1,5 +1,5 @@
 import deployments from "@/generated/deployments.json";
-import type { NetworkConfig } from "./networks";
+import { networks, type NetworkConfig, type NetworkKey } from "./networks";
 
 type Deployment = { registry: `0x${string}`; blockNumber: number | null; txHash: string | null; deployedAt: string };
 
@@ -13,3 +13,9 @@ export function registryDeployment(network: Pick<NetworkConfig, "chainId">): Dep
 export function registryAddress(network: Pick<NetworkConfig, "chainId">): `0x${string}` | undefined {
   return registryDeployment(network)?.registry;
 }
+
+/**
+ * Network preselected for launching. Testnet until the Mainnet registry exists, then Mainnet.
+ * (URLs without `?net=` still mean Mainnet: see DEFAULT_NETWORK.)
+ */
+export const DEFAULT_LAUNCH_NETWORK: NetworkKey = byChain[String(networks.mainnet.chainId)] ? "mainnet" : "testnet";

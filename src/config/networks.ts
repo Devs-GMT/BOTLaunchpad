@@ -60,3 +60,8 @@ export function addChainParams(n: NetworkConfig) {
     blockExplorerUrls: [n.explorerUrl],
   };
 }
+
+/** Network from a `?net=` value. URLs without it mean Mainnet. */
+export function networkFromParam(value: string | null | undefined): NetworkConfig {
+  return isNetworkKey(value) ? networks[value] : networks[DEFAULT_NETWORK];
+}

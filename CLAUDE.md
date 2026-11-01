@@ -59,6 +59,8 @@ pnpm -C contracts deploy:registry --network botTestnet   # or botMainnet
 - Call `estimateGas` before every write and show the cost in BOT. Never request token approvals or permissions of any kind.
 - Decode custom errors with the template's ABI and map them to friendly copy (the `errors` map in each template definition). Never show a raw revert string or JSON-RPC error to users.
 - Chain IDs are **677** (mainnet) and **968** (testnet). All network constants live in `src/config/networks.ts`. Registry addresses live in `src/config/addresses.ts`. Hard-code these values nowhere else.
+- Convert struct return values with `structs()` / `struct()` from `@/web3` before reading fields. ethers v6 `Result` extends Array, so a field named `at` returns `Array.prototype.at` (this bit us on every `at` timestamp).
+- Reads against a deployed template go through `useTemplateRead`, and writes through `useTemplateWrite` + `ActionButton` (`src/templates/runtime.ts`).
 - Persist unregistered deploys in localStorage under `botlaunchpad:v1:pending:<chainId>` (see `lib/storage.ts`).
 
 ## Contract rules

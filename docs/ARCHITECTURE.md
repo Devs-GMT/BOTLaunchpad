@@ -156,7 +156,7 @@ export interface TemplateDefinition<S extends z.ZodType> {
 
 `FieldConfig` supports `text | textarea | datetime | number | list (min/max items) | segmented`. `TemplateForm` renders any definition generically, so no per-template form components exist.
 
-Definitions stay free of React so server components can import them. The Interact UIs live next to each definition (`templates/<slug>/<Name>Interact.tsx`) and are mapped in `templates/interact.ts` with `next/dynamic`, so only the contract page loads them.
+Definitions stay free of React so server components can import them. Interact UIs share `templates/runtime.ts` (`useTemplateRead`, `useTemplateWrite`, `useNow`, `lastPage`) and `components/web3/ActionButton` (wallet gate + button + `TxStatus`). The Interact UIs live next to each definition (`templates/<slug>/<Name>Interact.tsx`) and are mapped in `templates/interact.ts` with `next/dynamic`, so only the contract page loads them.
 
 ## 4. Data flow
 

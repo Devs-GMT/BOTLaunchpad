@@ -109,16 +109,18 @@ _Verified 2026-11-01 with a headless E2E (Playwright + an injected EIP-1193 wall
 
 ## P6 · Contract page + Interact UIs
 
-- [ ] `useResolveContract` (registry, then codehash, then other-network check, then not-launchpad)
-- [ ] ContractHeader ledger (name, template chip, owner, "You own this" lilac pill, explorer, share, verify link)
-- [ ] SuccessPanel (`?new=1`): copy address, View on explorer ↗, Share, Verify helper, Launch another. If not listed: `RegisterNow`
-- [ ] NotLaunchpad state + explorer link
-- [ ] `GuestbookInteract`: sign form + wall (newest first, paginated). Disabled if already signed.
-- [ ] `PollInteract`: options as vote buttons + result bars, ends-in countdown, owner Close. Disabled with a reason when ended, closed or already voted.
-- [ ] `TodoInteract`: add task (hidden or explained if not allowed), list with toggle per permission
-- [ ] `TipJarInteract`: amount (min 0.001) + note, tips list, total, owner Withdraw (disabled at 0)
-- [ ] `CheckInInteract`: check-in button with window/cap state, count/max meter, attendee ledger
-- [ ] All Interact writes use useTxFlow + estimateGas + friendly errors, and refetch after confirmation
+- [x] `useResolveContract` (registry, then codehash, then other-network check, then not-launchpad)
+- [x] ContractHeader ledger (name, template chip, owner, "You own this" lilac pill, explorer, share, verify link)
+- [x] SuccessPanel (`?new=1`): copy address, View on explorer ↗, Share, Verify helper, Launch another. If not listed: `RegisterNow`
+- [x] NotLaunchpad state + explorer link
+- [x] `GuestbookInteract`: sign form + wall (newest first, paginated). Disabled if already signed.
+- [x] `PollInteract`: options as vote buttons + result bars, ends-in countdown, owner Close. Disabled with a reason when ended, closed or already voted.
+- [x] `TodoInteract`: add task (hidden or explained if not allowed), list with toggle per permission
+- [x] `TipJarInteract`: amount (min 0.001) + note, tips list, total, owner Withdraw (disabled at 0)
+- [x] `CheckInInteract`: check-in button with window/cap state, count/max meter, attendee ledger
+- [x] All Interact writes use useTxFlow + estimateGas + friendly errors, and refetch after confirmation
+
+_Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted, signed, was blocked from an owner-only board, tipped (and got the min-tip error first), checked in; owner added + ticked a task, withdrew, sees Close poll; unlisted contract listed from its own page; registry address → not-Launchpad, EOA → nothing deployed, testnet contract opened as mainnet → wrong-network with a switch link._
 
 **Accept:** opening a launched contract from a second wallet (incognito/other account) can use every Interact action. A random EOA or ERC-20 address shows NotLaunchpad.
 

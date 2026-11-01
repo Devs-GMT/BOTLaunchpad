@@ -3,6 +3,7 @@ import { registryAddress } from "@/config/addresses";
 import type { NetworkConfig } from "@/config/networks";
 import registryJson from "@/generated/registry.json";
 import { readProvider } from "./providers";
+import { struct, structs } from "./structs";
 
 export const registryInterface = new Interface(registryJson.abi);
 
@@ -73,13 +74,13 @@ export async function getRecentLaunches(network: NetworkConfig, count: number): 
   const registry = registryContract(network);
   const total = Number(await registry.getFunction("total")());
   const from = Math.max(0, total - count);
-  const page = (await registry.getFunction("getLaunches")(from, count)) as RawLaunch[];
+  const page = structs<RawLaunch>(await registry.getFunction("getLaunches")(from, count));
   return page.map((raw, i) => toLaunch(raw, from + i + 1)).reverse();
 }
 
 export async function getLaunchesOf(network: NetworkConfig, owner: string): Promise<Launch[]> {
   const registry = registryContract(network);
-  const list = (await registry.getFunction("launchesOf")(owner)) as RawLaunch[];
+  const list = structs<RawLaunch>(await registry.getFunction("launchesOf")(owner));
   // launchesOf doesn't return ids; resolve them so rows can link and sort.
   const ids = await Promise.all(list.map((l) => registry.getFunction("idOf")(l.contractAddr) as Promise<bigint>));
   return list.map((raw, i) => toLaunch(raw, Number(ids[i]))).reverse();
@@ -89,6 +90,6 @@ export async function getLaunchByAddress(network: NetworkConfig, address: string
   const registry = registryContract(network);
   const id = Number(await registry.getFunction("idOf")(address));
   if (!id) return null;
-  const raw = (await registry.getFunction("launchAt")(id)) as RawLaunch;
+  const raw = struct<RawLaunch>(await registry.getFunction("launchAt")(id));
   return toLaunch(raw, id);
 }

@@ -9,12 +9,12 @@ import { networks, type NetworkKey } from "@/config/networks";
 import { safetyNote } from "@/config/site";
 import { contractHref } from "@/lib/explorer";
 import { clampBytes, templateBySlug } from "@/templates";
-import { hasRegistry, useSelectedNetwork, useWallet } from "@/web3";
+import { hasRegistry, useRegister, useSelectedNetwork, useWallet } from "@/web3";
 import { FEED_NAME_MAX, ReviewStep } from "./components/ReviewStep";
 import { LaunchPanel } from "./components/LaunchPanel";
 import { TemplateForm } from "./components/TemplateForm";
 import { useDeploy } from "./hooks/useDeploy";
-import { useRegister } from "./hooks/useRegister";
+
 import { useWizard } from "./hooks/useWizard";
 
 export function LaunchWizard({ slug }: { slug: string }) {

@@ -21,10 +21,10 @@ Before mainnet launch, check the decimals and whether the explorer verify form i
 ```ts
 solidity: {
   version: '0.8.20',
-  settings: { optimizer: { enabled: true, runs: 200 }, evmVersion: 'paris', metadata: { bytecodeHash: 'ipfs' } },
+  settings: { optimizer: { enabled: true, runs: 200 }, evmVersion: 'paris', metadata: { bytecodeHash: 'none' } },
 }
 ```
-The Verify helper shows these exact values. Changing any of them changes every code hash, which means a new registry.
+`bytecodeHash: 'none'` keeps the metadata IPFS hash (which embeds the source path) out of the bytecode, so explorer verification is an exact match whatever the uploaded file is named. The Verify helper shows these exact values, including "Metadata hash: none". Changing any of them changes every code hash, which means a new registry.
 
 ## 3. Shared template rules
 
@@ -165,6 +165,8 @@ Written by `contracts/scripts/export.ts` after `compile`. The frontend imports i
 }
 ```
 
+`src/generated/deployments.json` is written by `scripts/deploy-registry.ts`: `{ "<chainId>": { registry, blockNumber, txHash, deployedAt } }`. `src/config/addresses.ts` reads it, so the frontend never hard-codes an address.
+
 `runtimeCodeHash` must equal `keccak256(eth_getCode(deployed))`. The export script asserts this by deploying each template on the Hardhat network and comparing.
 
 ## 8. Deployed addresses
@@ -177,4 +179,4 @@ Written by `contracts/scripts/export.ts` after `compile`. The frontend imports i
 Seed launches (mainnet), one per template: _tbd_.
 
 ## 9. Changelog
-- v1: initial 5 templates + registry.
+- v1: initial 5 templates + registry. `bytecodeHash: none`. Deploy gas on the in-process network: Guestbook 628k · Poll 729k · TodoBoard 719k · TipJar 737k · EventCheckIn 577k (≈0.012–0.015 BOT at 20 gwei).

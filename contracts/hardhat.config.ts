@@ -8,7 +8,8 @@ const compiler = {
   settings: {
     optimizer: { enabled: true, runs: 200 },
     evmVersion: "paris",
-    metadata: { bytecodeHash: "ipfs" },
+    // "none": bytecode does not depend on file paths, so explorer verification is an exact match.
+    metadata: { bytecodeHash: "none" },
   },
 } as const;
 

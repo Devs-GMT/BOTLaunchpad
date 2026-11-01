@@ -52,11 +52,11 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P2 · Registry + export pipeline
 
-- [ ] `LaunchpadRegistry.sol` + `IOwned.sol` per [CONTRACTS.md §5](CONTRACTS.md)
-- [ ] Registry tests incl. `FakeOwned.sol` (test-only) rejected with `CodeMismatch`
-- [ ] `scripts/export.ts`: compile, deploy each template on the in-process network, assert codehash, write `src/generated/templates.json` (schema §7)
-- [ ] `scripts/deploy-registry.ts`: reads the hashes from templates.json, deploys, prints the address, appends it to `CONTRACTS.md §8`
-- [ ] Deploy the registry on **testnet**. Put the address in `src/config/addresses.ts`.
+- [x] `LaunchpadRegistry.sol` + `IOwned.sol` per [CONTRACTS.md §5](CONTRACTS.md)
+- [x] Registry tests incl. `FakeOwned` (test-only) rejected with `CodeMismatch` (11 tests)
+- [x] `scripts/export.ts`: deploy each template on the in-process network, measure `deployGas`, assert codehash, write `src/generated/templates.json` (schema §7)
+- [x] `scripts/deploy-registry.ts`: checks templates.json is fresh, deploys with its hashes, writes `src/generated/deployments.json` (read by `src/config/addresses.ts`)
+- [ ] Deploy the registry on **testnet**: `pnpm -C contracts deploy:registry --network botTestnet`, then copy the address into CONTRACTS.md §8
 - [ ] Manual check on testnet with 2 wallets: deploy 1 Poll via Hardhat script → register → read `stats()`
 
 **Accept:** `templates.json` exists and is valid. The testnet registry address resolves on scan.bohr.life. Registering a real contract succeeds and a fake one fails.

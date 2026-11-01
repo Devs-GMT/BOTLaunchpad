@@ -90,7 +90,9 @@ BOTLaunchpad/
 │  │  explorer.ts (tx/address URLs), share.ts, time.ts
 │  │
 │  ├─ providers/Providers.tsx   # QueryClientProvider + WalletProvider + NetworkProvider + Toaster
-│  ├─ generated/templates.json  # WRITTEN BY contracts/scripts/export.ts. Do not edit.
+│  ├─ generated/                # machine-written, do not edit
+│  │  ├─ templates.json         #   by contracts/scripts/export.ts
+│  │  └─ deployments.json       #   by contracts/scripts/deploy-registry.ts
 │  └─ styles/globals.css        # @import "tailwindcss"; @theme tokens; base layer
 │
 ├─ contracts/                   # Hardhat package (own package.json)
@@ -99,7 +101,7 @@ BOTLaunchpad/
 │  │  ├─ LaunchpadRegistry.sol
 │  │  └─ interfaces/IOwned.sol
 │  ├─ test/                     # one file per contract + registry.fake.test.ts
-│  ├─ scripts/ export.ts, deploy-registry.ts, seed.ts
+│  ├─ scripts/ templates.ts, export.ts, deploy-registry.ts
 │  └─ hardhat.config.ts
 │
 ├─ public/                      # images (template covers, problem-card photos), og

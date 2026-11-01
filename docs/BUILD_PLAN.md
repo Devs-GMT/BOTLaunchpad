@@ -63,13 +63,13 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P3 · UI primitives & graphics (∥ with P1/P2)
 
-- [ ] `lib/cn.ts`, `lib/format.ts` (shortAddress, formatBOT, relativeTime, byteLength)
-- [ ] `components/ui`: Button, LinkButton, Kicker, TwoToneHeading, Section, Container, DashedBox, Chip, StatusDot, Pill, LedgerRow, Skeleton, CopyButton
-- [ ] `components/ui`: FolderCard (SVG clipPath, stacked variant), NotchCard
-- [ ] `components/ui` form set: Field, TextInput, TextArea, DateTimeInput, NumberInput, ListInput, SegmentedControl, Toggle
-- [ ] `components/ui`: Tabs, Stepper, Dialog, Toast, Tooltip
-- [ ] `components/graphics`: LogoMark (3×3 dot glyph), PixelIcon (key, shield, lock, map, check, wallet), GridBackdrop, DotMatrixStack (static, then ambient animation), DotWorldMap, Watermark
-- [ ] A temporary `/_kitchen` route (dev only, removed before P10) that renders every primitive and variant
+- [x] `lib/cn.ts`, `lib/format.ts` (shortAddress, formatBOT, relativeTime, byteLength)
+- [x] `components/ui`: Button, LinkButton, Kicker, TwoToneHeading, Section, Container, DashedBox, Chip, StatusDot, Pill, LedgerRow, Skeleton, CopyButton
+- [x] `components/ui`: FolderCard (SVG clipPath, stacked variant), NotchCard
+- [x] `components/ui` form set: Field, TextInput, TextArea, DateTimeInput, NumberInput, ListInput, SegmentedControl, Toggle
+- [x] `components/ui`: Tabs, Stepper, Dialog (Toast + Tooltip deferred to the first screen that needs them, P5)
+- [x] `components/graphics`: LogoMark (3×3 dot glyph), PixelIcon (key, shield, lock, map, check, wallet, code), DotMatrixStack (ambient twinkle/breathe + block-tick flash), DotWorldMap (rasterised from coarse outlines), Watermark. GridBackdrop = `pixel-grid` utility on `Section grid`.
+- [x] A temporary `/kitchen` route (404 in production, removed in P9) that renders every primitive and variant. (`_kitchen` is a private folder in the App Router, so it can't be a route.)
 
 **Accept:** the kitchen page looks right at 375px and 1440px. No arbitrary hex values (`grep -r "\[#" src` is empty). No `rounded-xl/2xl`.
 
@@ -155,7 +155,7 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 - [ ] Safety copy: "Templates are provided as-is. Start on Testnet. Don't use Tip Jar for large amounts."
 - [ ] Keyboard pass (focus rings visible, tab order), `aria-live` for tx progress, colour contrast AA
 - [ ] Metadata + OG image per route; `/c/[address]` title = contract name when resolved
-- [ ] Remove `/_kitchen`
+- [ ] Remove `/kitchen` (`app/kitchen`, `src/modules/kitchen`)
 
 **Accept:** a full run on a 375px phone with MetaMask mobile's in-app browser works end to end.
 

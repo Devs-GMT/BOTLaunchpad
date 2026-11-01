@@ -58,6 +58,9 @@
   --text-h1: 3.5rem;
   --text-h1--line-height: 1.04;
   --text-h1--letter-spacing: -0.02em;
+  --text-h2-sm: 2rem;
+  --text-h2-sm--line-height: 1.1;
+  --text-h2-sm--letter-spacing: -0.02em;
   --text-h2: 2.75rem;
   --text-h2--line-height: 1.1;
   --text-h2--letter-spacing: -0.022em;
@@ -76,6 +79,9 @@
   --text-micro: 0.625rem;
   --text-micro--line-height: 0.875rem;
   --text-micro--letter-spacing: 0.08em;
+
+  --tracking-button: 0.01em;
+  --tracking-kicker: 0.06em;
 
   /* layout */
   --container-prose: 44ch;
@@ -99,6 +105,8 @@
   --animate-twinkle: twinkle 4s var(--ease-std) infinite;
   --animate-breathe: breathe 8s var(--ease-std) infinite;
   --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-flash: flash 0.7s var(--ease-out-quint) 1 both;
+  --animate-enter: enter 0.6s var(--ease-out-quint) both;
 
   @keyframes twinkle {
     0%, 100% { opacity: 1; }
@@ -107,6 +115,15 @@
   @keyframes breathe {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
+  }
+  @keyframes flash {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes shimmer {
     from { background-position: -200% 0; }
@@ -143,6 +160,30 @@
   border-width: 1px;
   border-style: dashed;
   border-color: var(--color-paper-400);
+}
+
+/* Folder silhouette: tab on the left, top edge steps down through a 45° diagonal. */
+@utility folder-clip {
+  clip-path: polygon(
+    0 0,
+    var(--folder-tab-w, 62%) 0,
+    calc(var(--folder-tab-w, 62%) + var(--folder-tab-h, 2rem)) var(--folder-tab-h, 2rem),
+    100% var(--folder-tab-h, 2rem),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Trapezoid tab that sits on top of a NotchCard. */
+@utility notch-clip {
+  clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 100%, 0 100%);
+}
+
+@utility skeleton {
+  background-color: var(--color-paper-200);
+  background-image: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
 }
 
 @utility section-y {

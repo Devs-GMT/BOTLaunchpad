@@ -127,7 +127,7 @@ Utilities to add (`@utility`):
 
 - **Host Grotesk 500** for every headline, **400** for body. No other weights except 600 for mono kickers.
 - Hero: 40px mobile / 56px tablet / 84px desktop, 3 lines max.
-- Headlines are almost always **two-tone**: `<TwoToneHeading lines={["Remix shows you how.", "Launchpad does it for you."]} />`. Line 2 is `ink-600` on light and `paper-700` on dark.
+- Headlines are almost always **two-tone**: `<TwoToneHeading lines={["Remix shows you how.", "Launchpad does it for you."]} />`. Line 2 is `ink-500` on light (reads lighter than PRD's #4A4441, closer to the reference) and `paper-700` on dark.
 - Body copy is `ink-500` (≈5.1:1 on paper-100), max width 36–44ch, 16–18px. `paper-600` (≈2.6:1) fails AA, so use it only for decoration, disabled states, or text ≥ 24px. On coal, body copy is `paper-500`.
 - Mono kicker: `font-mono text-mono uppercase text-ink-500`, optionally led by a 6px square bullet `▪`.
 - Numbers (block, count, gas) are always `font-mono tabular-nums`.
@@ -136,7 +136,7 @@ Utilities to add (`@utility`):
 
 | Shape | Use | Implementation |
 |---|---|---|
-| **FolderCard** | Problem cards, template showcase covers, success page | SVG `<clipPath clipPathUnits="objectBoundingBox">` with path `M0,0 H.69 L.81,.133 H1 V1 H0 Z` (stacked variant `.15`). Tab content (filename chip) sits top-left inside the tab area. |
+| **FolderCard** | Problem cards, template showcase covers, success page | `folder-clip` utility: CSS `polygon()` with a fixed 36px tab height and a 45° step (vars `--folder-tab-w`, `--folder-tab-h`), so the shape holds at any aspect ratio. The hairline is a clipped edge layer behind a 1px-inset clipped fill. Tab content (filename chip) sits top-left. |
 | **NotchCard** | Dark "Ownership & Safety" block, Review panel | Trapezoid tab protruding above the top-left edge (label inside), body square. Tab: `clip-path: polygon(0 100%, 0 0, calc(100% - 16px) 0, 100% 100%)`. |
 | **DashedBox** | Built-with chips, empty states, "slot" for a missing value, step badge "Steps: 8" | `dashed-slot`, height 60px for logo cells |
 | **LedgerRow** | Registry feed, chips with filename + mono date, verify settings | `flex justify-between` · left: icon + label · right: mono muted value · 1px bottom hairline |

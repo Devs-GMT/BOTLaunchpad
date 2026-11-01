@@ -17,6 +17,16 @@ export {
   type RegistryStats,
 } from "./registry";
 export { lookupCode, type CodeLookup } from "./codeHash";
-export { queryKeys, useBlockNumber, useRegistryStats, useRecentLaunches, useLaunchesOf, useGasPrice, useBalance } from "./queries";
+export {
+  queryKeys,
+  useBlockNumber,
+  useBlockSummary,
+  useRegistryStats,
+  useRecentLaunches,
+  useLaunchesOf,
+  useGasPrice,
+  useBalance,
+  type BlockSummary,
+} from "./queries";
 export { useRegister } from "./useRegister";
 export { struct, structs } from "./structs";

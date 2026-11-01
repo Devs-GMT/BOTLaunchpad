@@ -6,7 +6,8 @@ export interface ChipProps {
   label: ReactNode;
   /** Mono value on the right (date, size, status). */
   meta?: ReactNode;
-  tone?: "paper" | "lilac" | "coal";
+  /** `bare` drops the box: for places that already frame it, like a FolderCard tab. */
+  tone?: "paper" | "lilac" | "coal" | "bare";
   className?: string;
 }
 
@@ -19,6 +20,7 @@ export function Chip({ icon, label, meta, tone = "paper", className }: ChipProps
         tone === "paper" && "border-ink-900/12 bg-paper-0 text-ink-900",
         tone === "lilac" && "border-lilac-400 bg-lilac-100 text-ink-900",
         tone === "coal" && "border-paper-0/12 bg-coal-800 text-paper-50",
+        tone === "bare" && "border-transparent px-0 text-ink-900",
         className,
       )}
     >

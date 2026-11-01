@@ -9,11 +9,12 @@ export function TemplateCard({ template }: { template: Template }) {
   return (
     <Link href={`/launch/${template.slug}`} className="group block h-full" aria-label={`Use the ${template.title} template`}>
       <FolderCard
-        className="h-full transition-transform duration-200 ease-out-quint group-hover:-translate-y-1"
-        tab={<Chip label={artifact.fileName} meta={`${artifact.functionsCount} fn${artifact.functionsCount === 1 ? "" : "s"}`} />}
+        className="h-full"
+        interactive
+        tab={<Chip tone="bare" label={artifact.fileName} meta={`${artifact.functionsCount} fn${artifact.functionsCount === 1 ? "" : "s"}`} />}
         media={
-          <div className="pixel-grid flex h-36 items-center justify-center border-y border-ink-900/8 bg-paper-200 text-ink-900">
-            <PixelIcon name={template.icon} cell={7} />
+          <div className="pixel-grid flex h-36 items-center justify-center border-y border-ink-900/8 bg-paper-200 text-ink-900 transition-colors duration-200 group-hover:bg-paper-300">
+            <PixelIcon name={template.icon} cell={7} hoverWave />
           </div>
         }
         bodyClassName="gap-3"

@@ -68,3 +68,24 @@ export function useBalance(network: NetworkConfig, address: string | null | unde
     staleTime: 10_000,
   });
 }
+
+export interface BlockSummary {
+  number: number;
+  /** unix seconds */
+  timestamp: number;
+  txCount: number;
+}
+
+/** Header facts for one block. Past blocks never change, so they're cached for the session. */
+export function useBlockSummary(network: NetworkConfig, number: number | undefined) {
+  return useQuery({
+    queryKey: ["block", network.chainId, number ?? -1] as const,
+    queryFn: async (): Promise<BlockSummary | null> => {
+      const block = await readProvider(network).getBlock(number!);
+      return block && { number: block.number, timestamp: block.timestamp, txCount: block.transactions.length };
+    },
+    enabled: number !== undefined && number >= 0,
+    staleTime: Infinity,
+    placeholderData: (prev) => prev,
+  });
+}

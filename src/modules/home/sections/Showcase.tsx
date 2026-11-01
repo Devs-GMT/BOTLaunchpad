@@ -17,11 +17,12 @@ export function Showcase() {
               <Kicker bullet>{t.category}</Kicker>
               <Link href={`/launch/${t.slug}`} className="group block flex-1" aria-label={`Launch a ${t.title}`}>
                 <FolderCard
-                  className="h-full transition-transform duration-200 ease-out-quint group-hover:-translate-y-1"
-                  tab={<Chip label={t.artifact.fileName} />}
+                  className="h-full"
+                  interactive
+                  tab={<Chip tone="bare" label={t.artifact.fileName} />}
                   media={
-                    <div className="pixel-grid relative flex h-60 items-center justify-center border-y border-ink-900/8 bg-paper-200 text-ink-900">
-                      <PixelIcon name={t.icon} cell={10} accentClassName="fill-ink-500" />
+                    <div className="pixel-grid relative flex h-60 items-center justify-center border-y border-ink-900/8 bg-paper-200 text-ink-900 transition-colors duration-200 group-hover:bg-paper-300">
+                      <PixelIcon name={t.icon} cell={10} accentClassName="fill-ink-500" hoverWave />
                       <span className="absolute bottom-3 left-3 border border-ink-900/12 bg-paper-0 px-3 py-1.5 text-body font-medium">
                         {t.title}
                       </span>

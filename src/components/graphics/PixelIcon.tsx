@@ -133,10 +133,12 @@ export interface PixelIconProps {
   className?: string;
   accentClassName?: string;
   title?: string;
+  /** Cells blink in a diagonal wave when a parent `.group` is hovered. */
+  hoverWave?: boolean;
 }
 
 /** Pixel-dot icon drawn from a bitmap, so it stays crisp and themeable. */
-export function PixelIcon({ name, cell = 3, className, accentClassName = "fill-lilac-400", title }: PixelIconProps) {
+export function PixelIcon({ name, cell = 3, className, accentClassName = "fill-lilac-400", title, hoverWave }: PixelIconProps) {
   const rows = bitmaps[name];
   const width = Math.max(...rows.map((r) => r.length));
   const cells = [];
@@ -152,7 +154,8 @@ export function PixelIcon({ name, cell = 3, className, accentClassName = "fill-l
           y={y + 0.1}
           width={0.8}
           height={0.8}
-          className={c === "o" ? accentClassName : "fill-current"}
+          className={cn(c === "o" ? accentClassName : "fill-current", hoverWave && "group-hover:animate-blip")}
+          style={hoverWave ? { animationDelay: `${(x + y) * 28}ms` } : undefined}
         />,
       );
     }

@@ -16,6 +16,8 @@ export interface FolderCardProps {
   tone?: keyof typeof tones;
   /** Tab width as a share of the card width. */
   tabWidth?: `${number}%`;
+  /** Darkens the outline when a parent `.group` is hovered (cards that are links). */
+  interactive?: boolean;
   className?: string;
   bodyClassName?: string;
   children?: ReactNode;
@@ -30,6 +32,7 @@ export function FolderCard({
   media,
   tone = "paper",
   tabWidth = "62%",
+  interactive,
   className,
   bodyClassName,
   children,
@@ -38,7 +41,10 @@ export function FolderCard({
   const style = { "--folder-tab-w": tabWidth, "--folder-tab-h": "2.25rem" } as CSSProperties;
   return (
     <div className={cn("relative isolate flex flex-col", className)} style={style}>
-      <div aria-hidden className={cn("folder-clip absolute inset-0 -z-10", t.edge)} />
+      <div
+        aria-hidden
+        className={cn("folder-clip absolute inset-0 -z-10", t.edge, interactive && "transition-colors duration-200 group-hover:bg-ink-900/45")}
+      />
       <div aria-hidden className={cn("folder-clip absolute inset-px -z-10", t.fill)} />
       <div className="flex h-9 items-center px-3" style={{ width: tabWidth }}>
         {tab}

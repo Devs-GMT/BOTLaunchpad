@@ -3,7 +3,7 @@ import { BlockTimeline } from "../components/BlockTimeline";
 
 export function Hero() {
   return (
-    <section className="pixel-grid relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
+    <section className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
       <Container rail="wide" className="grid items-center gap-14 lg:grid-cols-12 lg:gap-6">
         <div className="flex flex-col gap-7 lg:col-span-7">
           <Kicker bullet>No-code contracts on BOT Chain</Kicker>

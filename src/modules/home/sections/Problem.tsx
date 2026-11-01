@@ -41,14 +41,15 @@ export function Problem() {
       <ul className="mt-14 grid gap-6 md:grid-cols-3">
         {cards.map((c, i) => (
           <li key={c.n}>
-            <Reveal index={i} className="h-full">
+            <Reveal index={i} className="group h-full">
               <FolderCard
                 className="h-full"
+                interactive
                 tabWidth="58%"
-                tab={<Chip label={c.file} meta={c.n} />}
+                tab={<Chip tone="bare" label={c.file} meta={c.n} />}
                 media={
                   <div className="pixel-grid relative flex h-52 items-center justify-center border-y border-ink-900/8 bg-paper-300 text-ink-700">
-                    <PixelIcon name={c.icon} cell={9} accentClassName="fill-ember-500" />
+                    <PixelIcon name={c.icon} cell={9} accentClassName="fill-ember-500" hoverWave />
                     <Chip
                       className="absolute bottom-3 left-3 h-7 font-mono text-micro uppercase"
                       icon={<span aria-hidden className="size-1.5 bg-ember-500" />}

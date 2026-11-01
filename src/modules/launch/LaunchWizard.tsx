@@ -9,7 +9,7 @@ import { networks, type NetworkKey } from "@/config/networks";
 import { safetyNote } from "@/config/site";
 import { contractHref } from "@/lib/explorer";
 import { clampBytes, templateBySlug } from "@/templates";
-import { hasRegistry, useSelectedNetwork } from "@/web3";
+import { hasRegistry, useSelectedNetwork, useWallet } from "@/web3";
 import { FEED_NAME_MAX, ReviewStep } from "./components/ReviewStep";
 import { LaunchPanel } from "./components/LaunchPanel";
 import { TemplateForm } from "./components/TemplateForm";
@@ -21,7 +21,19 @@ export function LaunchWizard({ slug }: { slug: string }) {
   const template = templateBySlug(slug)!;
   const wizard = useWizard(template);
   const [selectedNetwork, setNetwork] = useSelectedNetwork();
+  const wallet = useWallet();
   const router = useRouter();
+
+  // Picking a network in the UI also moves the wallet there, so the navbar chip and the launch target agree.
+  const chooseNetwork = (key: NetworkKey) => {
+    setNetwork(key);
+    const target = networks[key];
+    if (wallet.status === "connected" && wallet.chainId !== target.chainId) {
+      wallet.switchTo(target).catch(() => {
+        /* user declined in the wallet; RequireWallet keeps offering the switch */
+      });
+    }
+  };
 
   // Once deployed, the network is fixed to where the contract lives.
   const network = wizard.deployed ? Object.values(networks).find((n) => n.chainId === wizard.deployed!.chainId)! : selectedNetwork;
@@ -107,7 +119,7 @@ export function LaunchWizard({ slug }: { slug: string }) {
               feedName={wizard.feedName}
               onFeedName={(feedName) => wizard.update({ feedName })}
               network={network}
-              onNetwork={(key: NetworkKey) => setNetwork(key)}
+              onNetwork={chooseNetwork}
               onBack={() => wizard.update({ step: "form" })}
               onLaunch={startDeploy}
               busy={deploy.isBusy}

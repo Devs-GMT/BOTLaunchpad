@@ -7,7 +7,7 @@ import { networks, type NetworkConfig, type NetworkKey } from "@/config/networks
 import { external } from "@/config/site";
 import { byteLength } from "@/lib/format";
 import type { Template } from "@/templates";
-import { hasRegistry } from "@/web3";
+import { hasRegistry, useWallet } from "@/web3";
 import { ConstructorCall } from "./ConstructorCall";
 import { GasLine } from "./GasLine";
 
@@ -40,6 +40,8 @@ const networkOptions = [
 export function ReviewStep({ template, values, args, feedName, onFeedName, network, onNetwork, onBack, onLaunch, busy }: ReviewStepProps) {
   const nameError = feedNameError(feedName);
   const listing = hasRegistry(network);
+  const wallet = useWallet();
+  const walletElsewhere = wallet.status === "connected" && wallet.chainId !== network.chainId;
 
   const summary = (
     <div className="flex flex-col gap-8">
@@ -77,6 +79,11 @@ export function ReviewStep({ template, values, args, feedName, onFeedName, netwo
   const net = (
     <div className="flex flex-col gap-6">
       <SegmentedControl aria-label="Network" options={networkOptions} value={network.key} onChange={onNetwork} />
+      {walletElsewhere && (
+        <p className="text-small text-ink-700">
+          Your wallet is on {wallet.network?.name ?? "another network"}. Confirm the switch to {network.name} in MetaMask.
+        </p>
+      )}
       <div>
         <LedgerRow left="Chain ID" right={network.chainId} />
         <LedgerRow left="RPC" right={network.rpcUrl.replace("https://", "")} />

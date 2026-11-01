@@ -22,17 +22,17 @@ Every phase ends with an **acceptance check**. Tick boxes as you go. Estimates a
 
 ## P0 · Foundation
 
-- [ ] `pnpm create next-app` (TS, App Router, ESLint, **no** `src/` option; we create `src/` manually as a sibling of `app/`), Tailwind v4
-- [ ] `pnpm-workspace.yaml` with `.` and `contracts`
-- [ ] `tsconfig.json` paths: `"@/*": ["./src/*"]`, `strict: true`, `noUncheckedIndexedAccess: true`
-- [ ] Deps: `ethers`, `@tanstack/react-query`, `zod`, `react-hook-form`, `@hookform/resolvers`, `class-variance-authority`, `clsx`, `tailwind-merge`, `shiki`
-- [ ] Create folders from [ARCHITECTURE.md §1](ARCHITECTURE.md) with `index.ts` barrels
-- [ ] `src/styles/globals.css` with the full `@theme` from [DESIGN_SYSTEM.md §3](DESIGN_SYSTEM.md), base layer, `@utility` helpers
-- [ ] `app/layout.tsx`: `Host_Grotesk` + `JetBrains_Mono` from `next/font/google` as CSS variables, `<Providers>`, `<PageShell>`
-- [ ] ESLint `no-restricted-imports`: block `@/modules/*/*` (only barrels), block `@/web3*` and `@/templates*` inside `src/components/ui/**`, block any non-`@/modules` import inside `app/**` except providers/styles/layout
-- [ ] Scripts: `dev`, `build`, `start`, `lint`, `typecheck` (`tsc --noEmit`)
-- [ ] `.env.example` with `NEXT_PUBLIC_SITE_URL`
-- [ ] `git init`, `.gitignore` (node_modules, .next, contracts/artifacts, contracts/cache, .env*)
+- [x] `pnpm create next-app` (TS, App Router, ESLint, **no** `src/` option; we create `src/` manually as a sibling of `app/`), Tailwind v4
+- [x] `pnpm-workspace.yaml` with `.` and `contracts`
+- [x] `tsconfig.json` paths: `"@/*": ["./src/*"]`, `strict: true`, `noUncheckedIndexedAccess: true`
+- [x] Deps: `ethers`, `@tanstack/react-query`, `zod`, `react-hook-form`, `@hookform/resolvers`, `class-variance-authority`, `clsx`, `tailwind-merge`, `shiki`
+- [x] Create folders from [ARCHITECTURE.md §1](ARCHITECTURE.md) with `index.ts` barrels (created per phase as they get content; git does not track empty folders)
+- [x] `src/styles/globals.css` with the full `@theme` from [DESIGN_SYSTEM.md §3](DESIGN_SYSTEM.md), base layer, `@utility` helpers
+- [x] `app/layout.tsx`: `Host_Grotesk` + `JetBrains_Mono` from `next/font/google` as CSS variables, `<Providers>`, `<PageShell>`
+- [x] ESLint `no-restricted-imports`: block `@/modules/*/*` (only barrels), block `@/web3*` and `@/templates*` inside `src/components/ui/**`, block any non-`@/modules` import inside `app/**` except providers/styles/layout
+- [x] Scripts: `dev`, `build`, `start`, `lint`, `typecheck` (`next typegen && tsc --noEmit`)
+- [x] `.env.example` with `NEXT_PUBLIC_SITE_URL`
+- [x] `git init`, `.gitignore` (node_modules, .next, contracts/artifacts, contracts/cache, .env*)
 
 **Accept:** `pnpm dev` shows a blank page in Host Grotesk on `paper-100`. `pnpm lint && pnpm typecheck` pass. A deliberate cross-module import fails lint.
 

@@ -52,7 +52,7 @@ Put these in `src/styles/globals.css`. Components may use **only** these names.
   --color-paper-300: #E6E5DE;  /* warm grey panel ("old way") */
   --color-paper-400: #E2E2DE;  /* dashed borders, dividers */
   --color-paper-500: #C2BFAF;
-  --color-paper-600: #9F9D9B;  /* body grey */
+  --color-paper-600: #9F9D9B;  /* decoration / disabled only (fails AA for body) */
   --color-paper-700: #7C7A76;  /* second line on dark */
 
   /* ink: umber */
@@ -88,6 +88,7 @@ Put these in `src/styles/globals.css`. Components may use **only** these names.
   --font-sans: var(--font-host-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
 
+  --text-hero-sm: 2.5rem; --text-hero-sm--line-height: 1; --text-hero-sm--letter-spacing: -0.02em;  /* 40px, mobile hero */
   --text-hero: 5.25rem;   --text-hero--line-height: 1;    --text-hero--letter-spacing: -0.012em; /* 84px */
   --text-h1:   3.5rem;    --text-h1--line-height: 1.04;   --text-h1--letter-spacing: -0.02em;    /* 56px */
   --text-h2:   2.75rem;   --text-h2--line-height: 1.1;    --text-h2--letter-spacing: -0.022em;   /* 44px */
@@ -99,6 +100,7 @@ Put these in `src/styles/globals.css`. Components may use **only** these names.
   --text-micro: 0.625rem; --text-micro--line-height: 0.875rem; --text-micro--letter-spacing: 0.08em;
 
   /* layout */
+  --container-prose: 44ch;        /* body copy measure */
   --container-rail: 77.5rem;      /* 1240px */
   --container-rail-wide: 103rem;  /* ~1650px, hero & footer */
   --spacing-section: 8rem;        /* vertical rhythm desktop; 5rem mobile via utility */
@@ -126,7 +128,7 @@ Utilities to add (`@utility`):
 - **Host Grotesk 500** for every headline, **400** for body. No other weights except 600 for mono kickers.
 - Hero: 40px mobile / 56px tablet / 84px desktop, 3 lines max.
 - Headlines are almost always **two-tone**: `<TwoToneHeading lines={["Remix shows you how.", "Launchpad does it for you."]} />`. Line 2 is `ink-600` on light and `paper-700` on dark.
-- Body copy is `paper-600`, max width 36–44ch, 16–18px.
+- Body copy is `ink-500` (≈5.1:1 on paper-100), max width 36–44ch, 16–18px. `paper-600` (≈2.6:1) fails AA, so use it only for decoration, disabled states, or text ≥ 24px. On coal, body copy is `paper-500`.
 - Mono kicker: `font-mono text-mono uppercase text-ink-500`, optionally led by a 6px square bullet `▪`.
 - Numbers (block, count, gas) are always `font-mono tabular-nums`.
 

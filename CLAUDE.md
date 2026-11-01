@@ -11,6 +11,8 @@ Read before working:
 
 ## Stack
 
+> Next.js 16.4 has breaking changes vs. older training data. Check `node_modules/next/dist/docs/` before using an unfamiliar API (see [AGENTS.md](AGENTS.md)). Cache Components + Partial Prefetching are on: wrap client components that read `useSearchParams`/`useParams` in `<Suspense>`.
+
 - Next.js (latest stable, App Router), React 19, TypeScript `strict`
 - Tailwind CSS v4: CSS-first `@theme` tokens in `src/styles/globals.css`. There is no `tailwind.config.*`.
 - ethers v6 for chain access. TanStack Query for RPC reads. zod + react-hook-form for forms.

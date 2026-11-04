@@ -3,7 +3,7 @@ import { DotWorldMap, Watermark } from "@/components/graphics";
 import { Container } from "@/components/ui";
 import { liveNetwork } from "@/config/addresses";
 import { external } from "@/config/site";
-import { BotChainHex } from "./BotChainHex";
+import { BotChainLogo } from "./BotChainLogo";
 import { FooterStatus } from "./FooterStatus";
 
 type FooterLink = { label: string; href: string; external?: boolean };
@@ -81,7 +81,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="group flex items-center gap-3 self-start text-paper-500 transition-colors hover:text-teal-300"
           >
-            <BotChainHex className="size-14" />
+            <BotChainLogo className="h-14" />
             <span className="flex flex-col font-mono text-micro uppercase">
               <span>Built on</span>
               <span className="text-paper-50 group-hover:text-teal-300">BOT Chain</span>

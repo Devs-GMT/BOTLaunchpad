@@ -73,7 +73,7 @@ BOTLaunchpad/
 │  │  ├─ web3/                  # wallet-aware composites
 │  │  │  ConnectButton, NetworkBadge, AddressPill, TxLink, ExplorerLink,
 │  │  │  WrongNetworkBanner, InstallMetaMask, GasLine
-│  │  └─ layout/                # Navbar, Footer, FooterStatus, BotChainHex, PageShell, NotFound
+│  │  └─ layout/                # Navbar, Footer, FooterStatus, BotChainLogo, PageShell, NotFound
 │  │
 │  ├─ web3/                     # chain access (framework-agnostic where possible)
 │  │  ├─ providers.ts           # cached JsonRpcProvider per network (reads)

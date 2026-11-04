@@ -7,7 +7,7 @@ import { external } from "@/config/site";
 import { addressUrl } from "@/lib/explorer";
 import { formatNumber, shortAddress } from "@/lib/format";
 import { useBlockNumber, useRegistryStats } from "@/web3";
-import { BotChainHex } from "./BotChainHex";
+import { BotChainLogo } from "./BotChainLogo";
 
 const registry = registryAddress(liveNetwork);
 
@@ -30,7 +30,7 @@ export function FooterStatus() {
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-small font-medium text-paper-50 transition-colors hover:text-teal-300"
         >
-          <BotChainHex className="size-4" />
+          <BotChainLogo className="h-5" />
           BOT Chain
         </a>
         <Stat label="Chain ID">{liveNetwork.chainId}</Stat>

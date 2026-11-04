@@ -151,7 +151,7 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 ## P9 · Shell, states, polish
 
 - [x] Navbar: transparent at the top → paper-50 + hairline after scroll. Mobile sheet. Wallet chip + `Launch a contract →`. (Built early in P5.)
-- [x] Footer per PRD §12: status row (live dot, BOT Chain hex → botchain.ai, chain id, live block, launched count, registry address copy, View on explorer →), 4 link columns, "Built on BOT Chain" hex badge, giant watermark, bottom mono row. Grey dot + "RPC not responding" on failure. No Privacy/Terms links: there are no such pages, so the row says "No accounts · No fees · No tracking" instead. The status row reads the launch network (`liveNetwork` in `config/addresses.ts`).
+- [x] Footer per PRD §12: status row (live dot, BOT Chain logo → botchain.ai, chain id, live block, launched count, registry address copy, View on explorer →), 4 link columns, "Built on BOT Chain" logo badge, giant watermark, bottom mono row. Grey dot + "RPC not responding" on failure. No Privacy/Terms links: there are no such pages, so the row says "No accounts · No fees · No tracking" instead. The status row reads the launch network (`liveNetwork` in `config/addresses.ts`).
 - [x] Walk through every state in PRD §10 and tick it here (most were proven by the P5–P7 E2E runs):
   - [x] No MetaMask · [x] Wrong network · [x] Not enough BOT (faucet / get BOT link)
   - [x] Form errors · [x] Deploy rejected/failed · [x] Register skipped/failed → Register now
@@ -168,7 +168,7 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 ## P10 · Ship
 
 - [x] Deploy the registry on **mainnet**. Update `addresses.ts`, CONTRACTS.md §8, README, and the footer constant. (`addresses.ts` and the footer read `generated/deployments.json`, so they follow the deploy, and the launch default flipped to Mainnet.)
-- [ ] Seed: launch 1 of each template on mainnet from the site itself and register them. Record the addresses.
+- ~~Seed: launch 1 of each template on mainnet.~~ Dropped 2026-11-04, supervisor decision: the registry starts empty.
 - [ ] Vercel project + custom domain, `NEXT_PUBLIC_SITE_URL` set
 - [ ] README (see [README.md](../README.md)): what it is, how the templates were compiled, safety note, addresses, local dev
 - [ ] Demo clip: pick Poll → fill → launch → register → vote from a 2nd wallet

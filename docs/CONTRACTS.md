@@ -187,7 +187,6 @@ Testnet smoke launches against registry v2 (`pnpm -C contracts smoke --network b
 
 The mainnet address equals the retired testnet v1 registry because both were the deployer's first transaction on their chain (same sender, nonce 0). On testnet that address is stale, so always pair it with a chain id.
 
-Seed launches (mainnet), one per template: _tbd_.
 
 ## 9. Changelog
 - Mainnet (2026-11-04): registry deployed at `0xE310…B472` with the v2 template hashes (1.09M gas, ≈0.022 BOT at 20 gwei). No template changes.

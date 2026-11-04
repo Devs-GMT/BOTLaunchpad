@@ -172,14 +172,14 @@ Contract address in one config constant; if the RPC is down the dot turns grey: 
 1:15–1:45 — LaunchpadRegistry with code-hash + owner checks; deploy on testnet; test register with a real and a fake contract
 1:45–3:15 — Frontend: template picker, forms, review (code view + gas), deploy + register flow, success page, Interact pages for 5 templates, Verify helper, My launches, states
 3:15–4:00 — 8-section home page (dot-matrix hero SVG, side-by-side demo, charcoal block) + watermark footer with status row
-4:00–4:20 — Mainnet registry deploy, address constant, launch 1 of each template on mainnet as seed data, GitHub Pages + domain
+4:00–4:20 — Mainnet registry deploy, address constant, GitHub Pages + domain
 4:20–4:30 — README, demo clip (pick Poll → fill → launch → register → vote from 2nd wallet), X post tagging @BOTChain_ai
 
 
 14. Submission checklist
 
 
-[ ] Mainnet registry contract address (+ addresses of the 5 seed launches)
+[ ] Mainnet registry contract address
 [ ] Live website link
 [ ] GitHub repo with /contracts (5 templates + LaunchpadRegistry.sol), templates.json, plain-English README (how templates were compiled, safety note)
 [ ] X post with demo clip, tagging @BOTChain_ai

@@ -2,7 +2,7 @@
 
 Launch your first BOT Chain smart contract in two minutes. Pick a template, fill a short form, confirm in MetaMask. No code, no Remix, and the contract is yours.
 
-**Live:** _tbd_ · **Registry (mainnet):** _tbd_ on [scan.botchain.ai](https://scan.botchain.ai)
+**Live:** _tbd_ · **Registry (mainnet):** [`0xE310126CF53AeE93185Aae969a619cb402bEB472`](https://scan.botchain.ai/address/0xE310126CF53AeE93185Aae969a619cb402bEB472)
 
 ## Templates
 

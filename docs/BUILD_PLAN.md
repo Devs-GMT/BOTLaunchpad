@@ -167,7 +167,7 @@ _Verified 2026-11-01 (headless E2E, two real wallets on testnet): visitor voted,
 
 ## P10 · Ship
 
-- [ ] Deploy the registry on **mainnet**. Update `addresses.ts`, CONTRACTS.md §8, README, and the footer constant.
+- [x] Deploy the registry on **mainnet**. Update `addresses.ts`, CONTRACTS.md §8, README, and the footer constant. (`addresses.ts` and the footer read `generated/deployments.json`, so they follow the deploy, and the launch default flipped to Mainnet.)
 - [ ] Seed: launch 1 of each template on mainnet from the site itself and register them. Record the addresses.
 - [ ] Vercel project + custom domain, `NEXT_PUBLIC_SITE_URL` set
 - [ ] README (see [README.md](../README.md)): what it is, how the templates were compiled, safety note, addresses, local dev

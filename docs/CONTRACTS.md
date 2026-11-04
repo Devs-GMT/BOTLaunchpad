@@ -181,12 +181,15 @@ Written by `contracts/scripts/export.ts` after `compile`. The frontend imports i
 | Network | LaunchpadRegistry | Deployed | Tx |
 |---|---|---|---|
 | Testnet (968) | [`0x4c6F375aE291886322138a60EaC565978AAb80BC`](https://scan.bohr.life/address/0x4c6F375aE291886322138a60EaC565978AAb80BC) | 2026-11-01, block 28897193 | `0x988012ef…161343d` |
-| Mainnet (677) | _tbd_ | | |
+| Mainnet (677) | [`0xE310126CF53AeE93185Aae969a619cb402bEB472`](https://scan.botchain.ai/address/0xE310126CF53AeE93185Aae969a619cb402bEB472) | 2026-11-04, block 29036058 | `0x432d8244…8469154` |
 
 Testnet smoke launches against registry v2 (`pnpm -C contracts smoke --network botTestnet`, 2026-11-01): Guestbook `0xB44ea5a5187c2c61B2F3ADbA5cB2deF796cc1f4A` · Poll `0x7DCba55a0581dc26a4Ddfa22503CB89e45f61343` (fully verified on scan.bohr.life via the Verify helper output) · TodoBoard `0x603631C96c5561e89b58Fdc48742898Bf56eE49B` · TipJar `0x9C1B2262F836C20Eac2371Cf0C9501432aCf77bC` · EventCheckIn `0x05F116Fe56570E0817227f3BB501BF0edd71Bcb6`. Registry rejected wrong id (`CodeMismatch`), relisting (`AlreadyRegistered`), an EOA (`NotAContract`) and a non-owner (`NotOwner`). Register costs ~200–234k gas.
+
+The mainnet address equals the retired testnet v1 registry because both were the deployer's first transaction on their chain (same sender, nonce 0). On testnet that address is stale, so always pair it with a chain id.
 
 Seed launches (mainnet), one per template: _tbd_.
 
 ## 9. Changelog
+- Mainnet (2026-11-04): registry deployed at `0xE310…B472` with the v2 template hashes (1.09M gas, ≈0.022 BOT at 20 gwei). No template changes.
 - v2 (2026-11-01): deploy gas Guestbook 637k · Poll 738k · TodoBoard 728k · TipJar 746k · EventCheckIn 586k (≈0.012–0.015 BOT at 20 gwei). Templates compiled in isolation with solc-js and the default `bytecodeHash: ipfs`, so explorer verification is a full match. New testnet registry `0x4c6F…80BC`; contracts launched against v1 (`0xE310…B472`) are no longer recognised as templates.
 - v1: initial 5 templates + registry. `bytecodeHash: none` (explorers could only give a partial match). 

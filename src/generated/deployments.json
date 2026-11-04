@@ -1,4 +1,10 @@
 {
+  "677": {
+    "registry": "0xE310126CF53AeE93185Aae969a619cb402bEB472",
+    "blockNumber": 29036058,
+    "txHash": "0x432d8244af788ddcf3105f6a7e9d09d4f640558d94080b60c13e0a2b38469154",
+    "deployedAt": "2026-11-04T03:04:43.435Z"
+  },
   "968": {
     "registry": "0x4c6F375aE291886322138a60EaC565978AAb80BC",
     "blockNumber": 28897193,

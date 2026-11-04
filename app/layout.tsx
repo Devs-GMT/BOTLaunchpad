@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Host_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { PageShell } from "@/components/layout";
 import { Providers } from "@/providers";
 import { site } from "@/config/site";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Providers>
           <PageShell>{children}</PageShell>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
